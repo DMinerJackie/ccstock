@@ -1,0 +1,1 @@
+/home/steve/Documents/workspace/stock/build/bin/CMakeFiles/ccstock.dir
