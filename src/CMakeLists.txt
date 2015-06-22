@@ -1,0 +1,13 @@
+INCLUDE_DIRECTORIES(/usr/include) 
+INCLUDE_DIRECTORIES(/usr/include/curl) 
+INCLUDE_DIRECTORIES(/usr/include/boost) 
+
+SET( CMAKE_BUILD_TYPE Debug )
+
+ADD_DEFINITIONS (
+	-std=c++11
+)
+
+ADD_EXECUTABLE(ccstock ccstock.cpp)
+
+TARGET_LINK_LIBRARIES(ccstock curl)
