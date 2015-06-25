@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 00时13分41秒
-*Last Modified: 2015年06月22日 星期一 10时39分04秒
+*Last Modified: 2015年06月25日 星期四 22时35分13秒
 *Purpose:
 **/
 
@@ -10,11 +10,13 @@
 
 #include <iostream>
 #include <cstdio>
+#include <vector>
+#include <string>
 
 #include "io_aux.h"
-#include "defs.h"
+#include "common_defs.h"
 #include "../muridae/stock.h"
-#include "../muridae/crawler.h"
+#include "../cow/utility.h"
 
 using namespace std;
 
@@ -23,7 +25,6 @@ namespace tiger {
 class cmd_display {
 public:
 	using stock		= muridae::stock;
-	using crawler	= muridae::crawler;
 	using utility	= cow::utility;
 	using self_type = cmd_display;
 
@@ -33,7 +34,6 @@ public:
 			stock_info_one(stock);
 		}
 	}
-
 	static void stock_info_one(const stock& stock_) {
 		self_type::show_header(stock_);
 		io_aux::list_pair_out("\t", "\t",

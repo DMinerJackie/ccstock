@@ -10,4 +10,4 @@ ADD_DEFINITIONS (
 
 ADD_EXECUTABLE(ccstock ccstock.cpp)
 
-TARGET_LINK_LIBRARIES(ccstock curl)
+TARGET_LINK_LIBRARIES(ccstock curl boost_system boost_filesystem boost_program_options)

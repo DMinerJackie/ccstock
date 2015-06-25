@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 00时13分41秒
-*Last Modified: 2015年06月22日 星期一 11时54分49秒
+*Last Modified: 2015年06月24日 星期三 22时29分37秒
 *Purpose:
 **/
 
@@ -31,18 +31,15 @@ public:
 public:
 	crawler() {}
 	
-	bool config(int argc, char* argv[]) {
-		if (argc < 1) return false;
-		if (argc == 3 && strcmp(argv[1], "-c") == 0) {
-			utility::split(std::string(argv[2]), ',', code_vec);						
-		}
+	bool split_code(const std::string& code_str) {
+		utility::split(code_str, ',', code_vec);	
 		return true;
 	}
 
-	bool run(std::vector<stock>& stock_vec) {
+	bool run_code(std::vector<stock>& stock_vec) {
 		CURL *curl = curl_easy_init();
 		string qry_str;
-		if (! get_qry_str(qry_str)) { return false; }
+		if (!get_qry_str(qry_str)) { return false; }
 		if (curl) {
 			std::string stock_data;
 			CURLcode res;
@@ -56,6 +53,27 @@ public:
 		}	
 		return true;
 	}
+
+    bool list_code_name(std::vector<std::string>&code_vec, std::vector<stock>& stock_vec)
+    {
+        size_t i = 0;
+        for (auto code : code_vec) {
+            set_code_vec({code}); 
+            run_code(stock_vec);
+            if (i > 0 && i % 200 == 0) {
+                logger::log_debug_variadic("process ", code_vec[i - 200], "-", code_vec[i], " finished!"); 
+            }
+            ++i;
+        }
+        return true;
+    }
+
+private:
+    bool set_code_vec(const std::vector<std::string>& code_vec_)
+    {
+        this->code_vec = code_vec_;
+        return true;
+    }
 
 	inline bool get_qry_str(string& qry_str) {
 		qry_str += "http://hq.sinajs.cn/list=";

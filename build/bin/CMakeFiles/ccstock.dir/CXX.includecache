@@ -9,12 +9,28 @@
 /home/steve/Documents/workspace/stock/src/ccstock.cpp
 iostream
 -
+string
+-
 ccstock_config.h
 /home/steve/Documents/workspace/stock/src/ccstock_config.h
 
 /home/steve/Documents/workspace/stock/src/ccstock_config.h
 muridae/client.h
 /home/steve/Documents/workspace/stock/src/muridae/client.h
+cow/configurator.h
+/home/steve/Documents/workspace/stock/src/cow/configurator.h
+
+/home/steve/Documents/workspace/stock/src/cow/configurator.h
+string
+-
+boost/program_options.hpp
+-
+boost/property_tree/ptree.hpp
+-
+boost/property_tree/xml_parser.hpp
+-
+logger.h
+/home/steve/Documents/workspace/stock/src/cow/logger.h
 
 /home/steve/Documents/workspace/stock/src/cow/encoding.h
 cstring
@@ -45,11 +61,21 @@ iomanip
 -
 sstream
 -
+cassert
+-
 
 /home/steve/Documents/workspace/stock/src/muridae/client.h
 iostream
 -
 string
+-
+vector
+-
+string
+-
+functional
+-
+memory
 -
 crawler.h
 /home/steve/Documents/workspace/stock/src/muridae/crawler.h
@@ -57,6 +83,12 @@ stock.h
 /home/steve/Documents/workspace/stock/src/muridae/stock.h
 ../tiger/cmd_display.h
 /home/steve/Documents/workspace/stock/src/tiger/cmd_display.h
+../tiger/file_handler.h
+/home/steve/Documents/workspace/stock/src/tiger/file_handler.h
+../cow/utility.h
+/home/steve/Documents/workspace/stock/src/cow/utility.h
+../cow/configurator.h
+/home/steve/Documents/workspace/stock/src/cow/configurator.h
 
 /home/steve/Documents/workspace/stock/src/muridae/crawler.h
 cstring
@@ -111,18 +143,40 @@ iostream
 -
 cstdio
 -
+vector
+-
+string
+-
 io_aux.h
 /home/steve/Documents/workspace/stock/src/tiger/io_aux.h
 defs.h
 /home/steve/Documents/workspace/stock/src/tiger/defs.h
 ../muridae/stock.h
 /home/steve/Documents/workspace/stock/src/muridae/stock.h
-../muridae/crawler.h
-/home/steve/Documents/workspace/stock/src/muridae/crawler.h
+../cow/utility.h
+/home/steve/Documents/workspace/stock/src/cow/utility.h
 
 /home/steve/Documents/workspace/stock/src/tiger/defs.h
 string
 -
+vector
+-
+unordered_map
+-
+functional
+-
+
+/home/steve/Documents/workspace/stock/src/tiger/file_handler.h
+string
+-
+vector
+-
+fstream
+-
+io_aux.h
+/home/steve/Documents/workspace/stock/src/tiger/io_aux.h
+../muridae/stock.h
+/home/steve/Documents/workspace/stock/src/muridae/stock.h
 
 /home/steve/Documents/workspace/stock/src/tiger/io_aux.h
 string
@@ -135,6 +189,10 @@ cstdio
 -
 cstdarg
 -
+fstream
+-
 initializer_list
+-
+boost/filesystem.hpp
 -
 

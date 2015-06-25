@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 00时13分41秒
-*Last Modified: 2015年06月22日 星期一 10时39分30秒
+*Last Modified: 2015年06月22日 星期一 23时41分24秒
 *Purpose:
 **/
 
@@ -13,7 +13,10 @@
 #include <iostream>
 #include <cstdio>
 #include <cstdarg>
+#include <fstream>
 #include <initializer_list>
+
+#include <boost/filesystem.hpp>
 
 using namespace std;
 
@@ -74,6 +77,28 @@ public:
 
 	static void cmd2f(const double& val) { printf("%.2lf", val); }
 	static void divider() { printf("----------------------------------------------------------------------\n"); };
+
+	static bool create_folder(const char* dir_path)
+	{
+		boost::filesystem::path path(dir_path);
+		if (!boost::filesystem::exists(path)) {
+			return boost::filesystem::create_directories(path);			
+		}
+		return true;
+	}
+
+	template <typename T>
+	static void out_variadic(ostream& out, T& t)
+	{
+		out << t << endl;
+	}
+
+	template <typename T, typename... Args>
+	static void out_variadic(ostream& out, T& t, Args... args)
+	{
+		out << t;
+		out_variadic(out, args...);
+	}
 
 };
 

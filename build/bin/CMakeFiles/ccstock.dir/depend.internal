@@ -4,6 +4,7 @@
 bin/CMakeFiles/ccstock.dir/ccstock.cpp.o
  /home/steve/Documents/workspace/stock/src/ccstock.cpp
  /home/steve/Documents/workspace/stock/src/ccstock_config.h
+ /home/steve/Documents/workspace/stock/src/cow/configurator.h
  /home/steve/Documents/workspace/stock/src/cow/encoding.h
  /home/steve/Documents/workspace/stock/src/cow/logger.h
  /home/steve/Documents/workspace/stock/src/cow/utility.h
@@ -13,4 +14,5 @@ bin/CMakeFiles/ccstock.dir/ccstock.cpp.o
  /home/steve/Documents/workspace/stock/src/muridae/stock.h
  /home/steve/Documents/workspace/stock/src/tiger/cmd_display.h
  /home/steve/Documents/workspace/stock/src/tiger/defs.h
+ /home/steve/Documents/workspace/stock/src/tiger/file_handler.h
  /home/steve/Documents/workspace/stock/src/tiger/io_aux.h

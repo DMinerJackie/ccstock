@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 00时13分41秒
-*Last Modified: 2015年06月22日 星期一 11时54分26秒
+*Last Modified: 2015年06月23日 星期二 00时57分51秒
 *Purpose:
 **/
 
@@ -13,6 +13,7 @@
 #include <algorithm>
 #include <iomanip>
 #include <sstream>
+#include <cassert>
 
 namespace cow {
 
@@ -62,6 +63,29 @@ public:
 		out << std::fixed << std::setprecision(n) << param;
 		return out.str();
 	}
+
+    static bool gen_range(int beg, const int end, std::vector<std::string>& range_vec)
+    {
+        assert(beg <= end);
+        while (beg <= end)
+        {
+           range_vec.push_back(std::to_string(beg++));
+        }
+        return true;
+    }
+    static bool gen_range_str(int beg, const int end, std::vector<std::string>& range_vec)
+    {
+        assert(beg <= end);
+
+        std::ostringstream oss;
+        while (beg <= end)
+        {
+            oss.str("");
+            oss << std::setw(6) << std::setfill('0') << beg++;
+            range_vec.push_back(oss.str());
+        }
+        return true;
+    }
 };
 }
 

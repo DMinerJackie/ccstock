@@ -1,0 +1,26 @@
+<stock>
+    <market_data>
+        <code>
+            <sh>
+                <beg>600000</beg>
+                <end>604000</end>
+            </sh>
+            <sz>
+                <beg>000001</beg>
+                <end>000999</end>
+                <zxb>
+                    <beg>002001</beg>
+                    <end>002776</end>
+                </zxb>
+                <cyb>
+                    <beg>300001</beg>
+                    <end>300489</end>
+                </cyb>
+                <specials>
+                    <special>001696</special>
+                    <special>001896</special>
+                </specials>
+            </sz>
+        </code>
+    </market_data>
+</stock>

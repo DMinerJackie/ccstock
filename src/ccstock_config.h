@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 00时13分41秒
-*Last Modified: 2015年06月22日 星期一 11时55分22秒
+*Last Modified: 2015年06月23日 星期二 22时57分25秒
 *Purpose:
 **/
 
@@ -9,7 +9,9 @@
 #define CCSTOCK_CONFIG_H_
 
 #include "muridae/client.h"
+#include "cow/configurator.h"
 
-using client = muridae::client;
+using client        = muridae::client;
+using configurator  = cow::configurator;
 
 #endif

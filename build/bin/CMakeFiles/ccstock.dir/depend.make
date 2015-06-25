@@ -3,6 +3,7 @@
 
 bin/CMakeFiles/ccstock.dir/ccstock.cpp.o: ../src/ccstock.cpp
 bin/CMakeFiles/ccstock.dir/ccstock.cpp.o: ../src/ccstock_config.h
+bin/CMakeFiles/ccstock.dir/ccstock.cpp.o: ../src/cow/configurator.h
 bin/CMakeFiles/ccstock.dir/ccstock.cpp.o: ../src/cow/encoding.h
 bin/CMakeFiles/ccstock.dir/ccstock.cpp.o: ../src/cow/logger.h
 bin/CMakeFiles/ccstock.dir/ccstock.cpp.o: ../src/cow/utility.h
@@ -12,5 +13,6 @@ bin/CMakeFiles/ccstock.dir/ccstock.cpp.o: ../src/muridae/sina_decoder.h
 bin/CMakeFiles/ccstock.dir/ccstock.cpp.o: ../src/muridae/stock.h
 bin/CMakeFiles/ccstock.dir/ccstock.cpp.o: ../src/tiger/cmd_display.h
 bin/CMakeFiles/ccstock.dir/ccstock.cpp.o: ../src/tiger/defs.h
+bin/CMakeFiles/ccstock.dir/ccstock.cpp.o: ../src/tiger/file_handler.h
 bin/CMakeFiles/ccstock.dir/ccstock.cpp.o: ../src/tiger/io_aux.h
 
