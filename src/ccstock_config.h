@@ -8,10 +8,10 @@
 #ifndef CCSTOCK_CONFIG_H_
 #define CCSTOCK_CONFIG_H_
 
-#include "muridae/client.h"
-#include "cow/configurator.h"
+#include "gateway/client.h"
+#include "common/configurator.h"
 
-using client        = muridae::client;
-using configurator  = cow::configurator;
+using client        = gateway::client;
+using configurator  = common::configurator;
 
 #endif

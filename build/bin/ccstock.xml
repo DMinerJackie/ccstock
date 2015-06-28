@@ -1,6 +1,8 @@
 <stock>
     <market_data>
         <code>
+            <sh_market>s_sh000001</sh_market>
+            <sz_market>s_sz399001</sz_market>
             <sh>
                 <beg>600000</beg>
                 <end>604000</end>
@@ -16,11 +18,18 @@
                     <beg>300001</beg>
                     <end>300489</end>
                 </cyb>
+                <!-- 深圳市场的特殊股票编号 -->
                 <specials>
                     <special>001696</special>
                     <special>001896</special>
                 </specials>
             </sz>
+            <!-- 文件位置 -->
+            <code_path>data/code/</code_path>
+            <!-- 自选股文件位置 -->
+            <option_path>data/code/</option_path>
         </code>
+        <!-- 爬虫每次请求的股票信息数 -->
+        <request_speed>300</request_speed>
     </market_data>
 </stock>

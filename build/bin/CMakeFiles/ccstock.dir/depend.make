@@ -3,16 +3,16 @@
 
 bin/CMakeFiles/ccstock.dir/ccstock.cpp.o: ../src/ccstock.cpp
 bin/CMakeFiles/ccstock.dir/ccstock.cpp.o: ../src/ccstock_config.h
-bin/CMakeFiles/ccstock.dir/ccstock.cpp.o: ../src/cow/configurator.h
-bin/CMakeFiles/ccstock.dir/ccstock.cpp.o: ../src/cow/encoding.h
-bin/CMakeFiles/ccstock.dir/ccstock.cpp.o: ../src/cow/logger.h
-bin/CMakeFiles/ccstock.dir/ccstock.cpp.o: ../src/cow/utility.h
-bin/CMakeFiles/ccstock.dir/ccstock.cpp.o: ../src/muridae/client.h
-bin/CMakeFiles/ccstock.dir/ccstock.cpp.o: ../src/muridae/crawler.h
-bin/CMakeFiles/ccstock.dir/ccstock.cpp.o: ../src/muridae/sina_decoder.h
-bin/CMakeFiles/ccstock.dir/ccstock.cpp.o: ../src/muridae/stock.h
-bin/CMakeFiles/ccstock.dir/ccstock.cpp.o: ../src/tiger/cmd_display.h
-bin/CMakeFiles/ccstock.dir/ccstock.cpp.o: ../src/tiger/defs.h
-bin/CMakeFiles/ccstock.dir/ccstock.cpp.o: ../src/tiger/file_handler.h
-bin/CMakeFiles/ccstock.dir/ccstock.cpp.o: ../src/tiger/io_aux.h
+bin/CMakeFiles/ccstock.dir/ccstock.cpp.o: ../src/common/configurator.h
+bin/CMakeFiles/ccstock.dir/ccstock.cpp.o: ../src/common/encoding.h
+bin/CMakeFiles/ccstock.dir/ccstock.cpp.o: ../src/common/logger.h
+bin/CMakeFiles/ccstock.dir/ccstock.cpp.o: ../src/common/utility.h
+bin/CMakeFiles/ccstock.dir/ccstock.cpp.o: ../src/gateway/client.h
+bin/CMakeFiles/ccstock.dir/ccstock.cpp.o: ../src/gateway/crawler.h
+bin/CMakeFiles/ccstock.dir/ccstock.cpp.o: ../src/gateway/sina_decoder.h
+bin/CMakeFiles/ccstock.dir/ccstock.cpp.o: ../src/gateway/stock.h
+bin/CMakeFiles/ccstock.dir/ccstock.cpp.o: ../src/simulator/cmd_display.h
+bin/CMakeFiles/ccstock.dir/ccstock.cpp.o: ../src/simulator/common_defs.h
+bin/CMakeFiles/ccstock.dir/ccstock.cpp.o: ../src/simulator/file_handler.h
+bin/CMakeFiles/ccstock.dir/ccstock.cpp.o: ../src/simulator/io_aux.h
 

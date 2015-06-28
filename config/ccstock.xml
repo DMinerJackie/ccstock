@@ -16,11 +16,15 @@
                     <beg>300001</beg>
                     <end>300489</end>
                 </cyb>
+                <!-- 深圳市场的特殊股票编号 -->
                 <specials>
                     <special>001696</special>
                     <special>001896</special>
                 </specials>
             </sz>
+            <!-- 自选股文件位置 -->
+            <option_path>data/code/</option_path>
         </code>
+        <request_speed>300</request_speed>
     </market_data>
 </stock>

@@ -15,12 +15,12 @@ ccstock_config.h
 /home/steve/Documents/workspace/stock/src/ccstock_config.h
 
 /home/steve/Documents/workspace/stock/src/ccstock_config.h
-muridae/client.h
-/home/steve/Documents/workspace/stock/src/muridae/client.h
-cow/configurator.h
-/home/steve/Documents/workspace/stock/src/cow/configurator.h
+gateway/client.h
+/home/steve/Documents/workspace/stock/src/gateway/client.h
+common/configurator.h
+/home/steve/Documents/workspace/stock/src/common/configurator.h
 
-/home/steve/Documents/workspace/stock/src/cow/configurator.h
+/home/steve/Documents/workspace/stock/src/common/configurator.h
 string
 -
 boost/program_options.hpp
@@ -30,9 +30,9 @@ boost/property_tree/ptree.hpp
 boost/property_tree/xml_parser.hpp
 -
 logger.h
-/home/steve/Documents/workspace/stock/src/cow/logger.h
+/home/steve/Documents/workspace/stock/src/common/logger.h
 
-/home/steve/Documents/workspace/stock/src/cow/encoding.h
+/home/steve/Documents/workspace/stock/src/common/encoding.h
 cstring
 -
 string
@@ -44,13 +44,13 @@ iconv.h
 iostream
 -
 
-/home/steve/Documents/workspace/stock/src/cow/logger.h
+/home/steve/Documents/workspace/stock/src/common/logger.h
 iostream
 -
 string
 -
 
-/home/steve/Documents/workspace/stock/src/cow/utility.h
+/home/steve/Documents/workspace/stock/src/common/utility.h
 string
 -
 vector
@@ -64,7 +64,7 @@ sstream
 cassert
 -
 
-/home/steve/Documents/workspace/stock/src/muridae/client.h
+/home/steve/Documents/workspace/stock/src/gateway/client.h
 iostream
 -
 string
@@ -75,22 +75,26 @@ string
 -
 functional
 -
+algorithm
+-
 memory
 -
+cstdint
+-
 crawler.h
-/home/steve/Documents/workspace/stock/src/muridae/crawler.h
+/home/steve/Documents/workspace/stock/src/gateway/crawler.h
 stock.h
-/home/steve/Documents/workspace/stock/src/muridae/stock.h
-../tiger/cmd_display.h
-/home/steve/Documents/workspace/stock/src/tiger/cmd_display.h
-../tiger/file_handler.h
-/home/steve/Documents/workspace/stock/src/tiger/file_handler.h
-../cow/utility.h
-/home/steve/Documents/workspace/stock/src/cow/utility.h
-../cow/configurator.h
-/home/steve/Documents/workspace/stock/src/cow/configurator.h
+/home/steve/Documents/workspace/stock/src/gateway/stock.h
+../simulator/cmd_display.h
+/home/steve/Documents/workspace/stock/src/simulator/cmd_display.h
+../simulator/file_handler.h
+/home/steve/Documents/workspace/stock/src/simulator/file_handler.h
+../common/utility.h
+/home/steve/Documents/workspace/stock/src/common/utility.h
+../common/configurator.h
+/home/steve/Documents/workspace/stock/src/common/configurator.h
 
-/home/steve/Documents/workspace/stock/src/muridae/crawler.h
+/home/steve/Documents/workspace/stock/src/gateway/crawler.h
 cstring
 -
 string
@@ -100,15 +104,17 @@ vector
 curl/curl.h
 -
 stock.h
-/home/steve/Documents/workspace/stock/src/muridae/stock.h
+/home/steve/Documents/workspace/stock/src/gateway/stock.h
 sina_decoder.h
-/home/steve/Documents/workspace/stock/src/muridae/sina_decoder.h
-../cow/logger.h
-/home/steve/Documents/workspace/stock/src/cow/logger.h
-../cow/utility.h
-/home/steve/Documents/workspace/stock/src/cow/utility.h
+/home/steve/Documents/workspace/stock/src/gateway/sina_decoder.h
+../common/logger.h
+/home/steve/Documents/workspace/stock/src/common/logger.h
+../common/utility.h
+/home/steve/Documents/workspace/stock/src/common/utility.h
+../simulator/common_defs.h
+/home/steve/Documents/workspace/stock/src/simulator/common_defs.h
 
-/home/steve/Documents/workspace/stock/src/muridae/sina_decoder.h
+/home/steve/Documents/workspace/stock/src/gateway/sina_decoder.h
 string
 -
 array
@@ -120,15 +126,15 @@ utility
 stddef.h
 -
 stock.h
-/home/steve/Documents/workspace/stock/src/muridae/stock.h
-../cow/encoding.h
-/home/steve/Documents/workspace/stock/src/cow/encoding.h
-../cow/utility.h
-/home/steve/Documents/workspace/stock/src/cow/utility.h
-../cow/logger.h
-/home/steve/Documents/workspace/stock/src/cow/logger.h
+/home/steve/Documents/workspace/stock/src/gateway/stock.h
+../common/encoding.h
+/home/steve/Documents/workspace/stock/src/common/encoding.h
+../common/utility.h
+/home/steve/Documents/workspace/stock/src/common/utility.h
+../common/logger.h
+/home/steve/Documents/workspace/stock/src/common/logger.h
 
-/home/steve/Documents/workspace/stock/src/muridae/stock.h
+/home/steve/Documents/workspace/stock/src/gateway/stock.h
 string
 -
 array
@@ -138,7 +144,7 @@ utility
 cstddef
 -
 
-/home/steve/Documents/workspace/stock/src/tiger/cmd_display.h
+/home/steve/Documents/workspace/stock/src/simulator/cmd_display.h
 iostream
 -
 cstdio
@@ -148,15 +154,15 @@ vector
 string
 -
 io_aux.h
-/home/steve/Documents/workspace/stock/src/tiger/io_aux.h
-defs.h
-/home/steve/Documents/workspace/stock/src/tiger/defs.h
-../muridae/stock.h
-/home/steve/Documents/workspace/stock/src/muridae/stock.h
-../cow/utility.h
-/home/steve/Documents/workspace/stock/src/cow/utility.h
+/home/steve/Documents/workspace/stock/src/simulator/io_aux.h
+common_defs.h
+/home/steve/Documents/workspace/stock/src/simulator/common_defs.h
+../gateway/stock.h
+/home/steve/Documents/workspace/stock/src/gateway/stock.h
+../common/utility.h
+/home/steve/Documents/workspace/stock/src/common/utility.h
 
-/home/steve/Documents/workspace/stock/src/tiger/defs.h
+/home/steve/Documents/workspace/stock/src/simulator/common_defs.h
 string
 -
 vector
@@ -166,19 +172,23 @@ unordered_map
 functional
 -
 
-/home/steve/Documents/workspace/stock/src/tiger/file_handler.h
+/home/steve/Documents/workspace/stock/src/simulator/file_handler.h
 string
 -
 vector
 -
 fstream
 -
+algorithm
+-
 io_aux.h
-/home/steve/Documents/workspace/stock/src/tiger/io_aux.h
-../muridae/stock.h
-/home/steve/Documents/workspace/stock/src/muridae/stock.h
+/home/steve/Documents/workspace/stock/src/simulator/io_aux.h
+../gateway/stock.h
+/home/steve/Documents/workspace/stock/src/gateway/stock.h
+../common/utility.h
+/home/steve/Documents/workspace/stock/src/common/utility.h
 
-/home/steve/Documents/workspace/stock/src/tiger/io_aux.h
+/home/steve/Documents/workspace/stock/src/simulator/io_aux.h
 string
 -
 iomanip
