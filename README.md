@@ -44,6 +44,7 @@
     -O [ --show-option ]  查看自选股
 
 **Demo**
+
 查看创业板(cyb)现价前20的股票
 
     ./ccstock -c ccstock.xml -d cyb -t 20 -o xj
