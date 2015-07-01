@@ -1,8 +1,16 @@
 <stock>
     <market_data>
         <code>
-            <sh_market>s_sh000001</sh_market>
-            <sz_market>s_sz399001</sz_market>
+            <markets>
+                <!-- 上证指数 -->
+                <market>s_sh000001</market>
+                <!-- 深圳成指 -->
+                <market>s_sz399001</market>
+                <!-- 中小板指数 -->
+                <market>s_sz399005</market>
+                <!-- 创业板指数 -->
+                <market>s_sz399006</market>
+            </markets>
             <sh>
                 <beg>600000</beg>
                 <end>604000</end>

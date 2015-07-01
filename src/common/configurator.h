@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月23日 星期二 22时30分03秒
-*Last Modified: 2015年06月27日 星期六 15时39分31秒
+*Last Modified: 2015年07月02日 星期四 00时09分04秒
 *Purpose:
 **/
 
@@ -26,7 +26,7 @@ public:
     configurator() 
     {
         desc.add_options()
-            ("help,h", "program help message")
+            ("help,h", "显示帮助信息")
         ;
     }
     bool add_plain_option(const char* name, const char* opt_desc)
@@ -73,7 +73,7 @@ public:
         po::store(po::parse_command_line(argc, argv, desc), vm);
         po::notify(vm);
         if (is_option_set("config")) {
-            pt::read_xml(get_string_option("config"), tree);
+            pt::read_xml(get_string_option("config"), tree, pt::xml_parser::no_comments);
         }
         return true;
     }

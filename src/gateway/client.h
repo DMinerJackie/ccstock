@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 00时13分41秒
-*Last Modified: 2015年06月27日 星期六 23时54分31秒
+*Last Modified: 2015年07月01日 星期三 21时45分48秒
 *Purpose:
 **/
 
@@ -51,9 +51,12 @@ public:
 	}
     void show_market()
     {
-        std::string sh_market = config->get_value("stock.market_data.code.sh_market", std::string());
-        std::string sz_market = config->get_value("stock.market_data.code.sz_market", std::string());
-        crawler_.show_market({sh_market, sz_market}, market_vec);
+        // std::string sh_market = config->get_value("stock.market_data.code.sh_market", std::string());
+        // std::string sz_market = config->get_value("stock.market_data.code.sz_market", std::string());
+        // std::string cyb_market = config->get_value("stock.market_data.code.cyb_market", std::string());
+        std::vector<std::string> market_codes;
+        config->get_multi_value("stock.market_data.code.markets", market_codes);
+        crawler_.show_market(market_codes, market_vec);
         display_market();
     }
     void show_md_bk(const std::string& bk, uint32_t speed, int32_t top_num, std::string& order)

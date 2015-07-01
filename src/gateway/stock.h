@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 00时13分41秒
-*Last Modified: 2015年06月27日 星期六 16时10分15秒
+*Last Modified: 2015年07月02日 星期四 00时03分23秒
 *Purpose:
 **/
 
@@ -51,6 +51,13 @@ public:
 	std::string time;
     
     double inc; // 涨跌幅
+};
+
+struct stock_basic {
+    std::string name;
+    std::string jp; // 简拼
+    std::string code; // 代码
+    std::string market_code; // 加sz/sh的代码
 };
 
 struct market {
