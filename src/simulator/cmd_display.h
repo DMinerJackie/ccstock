@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 00时13分41秒
-*Last Modified: 2015年06月27日 星期六 20时16分08秒
+*Last Modified: 2015年07月05日 星期日 00时52分59秒
 *Purpose:
 **/
 
@@ -13,19 +13,18 @@
 #include <vector>
 #include <string>
 
-#include "io_aux.h"
-#include "common_defs.h"
-#include "../gateway/stock.h"
-#include "../common/utility.h"
+#include "common/io_aux.h"
+#include "common/common_defs.h"
+#include "instrument/stock.h"
+#include "common/utility.h"
 
 using namespace std;
+using namespace common;
 
 namespace simulator {
 
 class cmd_display {
 public:
-	using stock		= gateway::stock;
-    using market    = gateway::market;
 	using utility	= common::utility;
 	using self_type = cmd_display;
 
@@ -57,8 +56,8 @@ private:
                  stock_.high_price,
                  stock_.low_price});
 		io_aux::list_pair_out("\t   ", "\n",
-				{VOL, TO}, 
-				{process_volumn(stock_.volumn).c_str(), process_to(stock_.turnover).c_str()}); 
+				{VOL, TO},
+				{process_volumn(stock_.volumn).c_str(), process_to(stock_.turnover).c_str()});
 		io_aux::divider();
 	}
 	static void stock_info_one_basic(const stock& stock_) {
@@ -67,8 +66,8 @@ private:
 				{CURR_P},
 				{stock_.curr_price});
 		io_aux::list_pair_out("\t   ", "\n",
-				{VOL, TO}, 
-				{process_volumn(stock_.volumn).c_str(), process_to(stock_.turnover).c_str()}); 
+				{VOL, TO},
+				{process_volumn(stock_.volumn).c_str(), process_to(stock_.turnover).c_str()});
 		io_aux::divider();
 	}
     static void market_info_one(const market& market_) {
@@ -82,7 +81,7 @@ private:
     }
 private:
 	static bool show_header(const stock& stock_) {
-		io_aux::list_out({10, 16, 11}, 
+		io_aux::list_out({10, 16, 11},
                 "",
 				{stock_.code, stock_.name, get_inc(stock_.inc)});
 		return true;
@@ -95,7 +94,7 @@ private:
 		return (utility::to_string_pcs(to / 1e8, 2) + "亿");
 	}
 	static std::string process_volumn_market(const double& vol) {
-		return utility::to_string_pcs(vol / 1e4, 2) + "万"; 
+		return utility::to_string_pcs(vol / 1e4, 2) + "万";
 	}
 	static std::string process_to_market(const double& to) {
 		return (utility::to_string_pcs(to / 1e4, 2) + "亿");

@@ -108,8 +108,21 @@ ccstock: cmake_check_build_system
 
 # fast build rule for target.
 ccstock/fast:
-	$(MAKE) -f bin/CMakeFiles/ccstock.dir/build.make bin/CMakeFiles/ccstock.dir/build
+	$(MAKE) -f src/CMakeFiles/ccstock.dir/build.make src/CMakeFiles/ccstock.dir/build
 .PHONY : ccstock/fast
+
+#=============================================================================
+# Target rules for targets named test_ev
+
+# Build rule for target.
+test_ev: cmake_check_build_system
+	$(MAKE) -f CMakeFiles/Makefile2 test_ev
+.PHONY : test_ev
+
+# fast build rule for target.
+test_ev/fast:
+	$(MAKE) -f src/test/CMakeFiles/test_ev.dir/build.make src/test/CMakeFiles/test_ev.dir/build
+.PHONY : test_ev/fast
 
 # Help Target
 help:
@@ -120,6 +133,7 @@ help:
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
 	@echo "... ccstock"
+	@echo "... test_ev"
 .PHONY : help
 
 

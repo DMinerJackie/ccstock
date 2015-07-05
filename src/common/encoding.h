@@ -27,16 +27,16 @@ public:
 
 		strcpy(src, str.c_str());
 		charset_convert("GBK", "UTF-8", src, len, dest, len * 2);
-		
+
 		return std::string(dest);
 	}
 private:
-	static int charset_convert(const char *from_charset, 
+	static int charset_convert(const char *from_charset,
 						const char *to_charset,
-						char *in_buf, 
-						size_t in_left, 
-						char *out_buf, 
-						size_t out_left) 
+						char *in_buf,
+						size_t in_left,
+						char *out_buf,
+						size_t out_left)
 	{
 		iconv_t icd;
 		char *pin = in_buf;

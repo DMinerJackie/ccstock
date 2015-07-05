@@ -1,18 +1,32 @@
 <stock>
     <market_data>
         <code>
+            <markets>
+                <!-- 上证指数 -->
+                <market>s_sh000001</market>
+                <!-- 深圳成指 -->
+                <market>s_sz399001</market>
+                <!-- 中小板指数 -->
+                <market>s_sz399005</market>
+                <!-- 创业板指数 -->
+                <market>s_sz399006</market>
+            </markets>
             <sh>
+                <!-- 上海市场股票代码范围 -->
                 <beg>600000</beg>
                 <end>604000</end>
             </sh>
             <sz>
+                <!-- 深圳市场股票代码范围 -->
                 <beg>000001</beg>
                 <end>000999</end>
                 <zxb>
+                    <!-- 中小板股票代码范围 -->
                     <beg>002001</beg>
                     <end>002776</end>
                 </zxb>
                 <cyb>
+                    <!-- 创业板股票代码范围 -->
                     <beg>300001</beg>
                     <end>300489</end>
                 </cyb>
@@ -22,9 +36,12 @@
                     <special>001896</special>
                 </specials>
             </sz>
+            <!-- 文件位置 -->
+            <code_path>data/code/</code_path>
             <!-- 自选股文件位置 -->
             <option_path>data/code/</option_path>
         </code>
+        <!-- 爬虫每次请求的股票信息数 -->
         <request_speed>300</request_speed>
     </market_data>
 </stock>

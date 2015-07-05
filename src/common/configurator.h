@@ -23,7 +23,7 @@ namespace pt = boost::property_tree;
 
 class configurator {
 public:
-    configurator() 
+    configurator()
     {
         desc.add_options()
             ("help,h", "显示帮助信息")

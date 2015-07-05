@@ -15,11 +15,13 @@
 #include <sstream>
 #include <cassert>
 
+#include "common_defs.h"
+
 namespace common {
 
 class utility {
 public:
-	static bool split(const std::string& str, char delim, std::vector<std::string>& str_vec, bool delim_end = false)
+	static bool split(const std::string& str, char delim, cc_vec_string& str_vec, bool delim_end = false)
 	{
 		size_t ps = 0, pe = 0;
 		while ((pe = str.find_first_of(delim, ps)) != std::string::npos) {
@@ -32,7 +34,7 @@ public:
 		return true;
 	}
 
-	static bool subsplit(const std::string& str, char delim, std::string& substr) 
+	static bool subsplit(const std::string& str, char delim, std::string& substr)
 	{
 		size_t ps = str.find_first_of(delim);
 		if (ps++ == std::string::npos) return false;
@@ -44,27 +46,27 @@ public:
 
 		return true;
 	}
-	
+
 	static bool delete_char(std::string&str, char ch)
 	{
 		str.erase(std::remove(str.begin(), str.end(), ch), str.end());
 		return true;
 	}
-	
+
 	template <typename T>
-	static std::string to_string(const T& param) { 
+	static std::string to_string(const T& param) {
 		return std::to_string(param);
 	}
-	
+
 	template <typename T>
-	static std::string to_string_pcs(const T& param, const size_t n = 6) 
+	static std::string to_string_pcs(const T& param, const size_t n = 6)
 	{
 		std::ostringstream out;
 		out << std::fixed << std::setprecision(n) << param;
 		return out.str();
 	}
 
-    static bool gen_range(int beg, const int end, std::vector<std::string>& range_vec)
+    static bool gen_range(int beg, const int end, cc_vec_string& range_vec)
     {
         assert(beg <= end);
         while (beg <= end)
@@ -73,7 +75,7 @@ public:
         }
         return true;
     }
-    static bool gen_range_str(int beg, const int end, std::vector<std::string>& range_vec)
+    static bool gen_range_str(int beg, const int end, cc_vec_string& range_vec)
     {
         assert(beg <= end);
 

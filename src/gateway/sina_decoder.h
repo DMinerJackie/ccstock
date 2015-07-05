@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 00时13分41秒
-*Last Modified: 2015年06月27日 星期六 16时52分30秒
+*Last Modified: 2015年07月05日 星期日 00时51分36秒
 *Purpose:
 **/
 
@@ -14,41 +14,66 @@
 #include <utility>
 #include <stddef.h> // size_t
 
-#include "stock.h"
-#include "../common/encoding.h"
-#include "../common/utility.h"
-#include "../common/logger.h"
+#include "simulator/instrument/stock.h"
+#include "common/encoding.h"
+#include "common/utility.h"
+#include "common/logger.h"
+#include "common/common_defs.h"
 
 namespace gateway {
 
 class sina_decoder {
 public:
+    using stock         = simulator::stock;
+    using stock_basic   = simulator::stock_basic;
+    using market 		= simulator::market;
 	using arr5			= std::array<double, 5>;
-	using encoding		= common::encoding;	
+	using encoding		= common::encoding;
 	using utility		= common::utility;
 	using logger		= common::logger;
 
 public:
+	static void decode_code(std::string& code_data, cc_vec_string& final_code) {
+        cc_vec_string code_data_vec;
+		utility::delete_char(code_data, '\n');
+		utility::split(code_data, ';', code_data_vec, true);
+        for (auto data : code_data_vec) {
+	    	std::string info;
+			utility::subsplit(data, '"', info);
+			if (info != "") {
+                final_code.push_back(data.substr(15, 6));
+			}
+        }
+    }
 	static bool decode(std::string& multi_md, std::vector<stock>& stock_vec) {
-		std::vector<std::string> md_vec;
+		cc_vec_string md_vec;
 		utility::delete_char(multi_md, '\n');
 		utility::split(multi_md, ';', md_vec, true);
 
 		for (auto md : md_vec) {
 			if (!decode_one(md, stock_vec)) { continue; }
 		}
-		
+
 		return true;
 	}
 	static bool decode_market(std::string& multi_md, std::vector<market>& market_vec) {
-		std::vector<std::string> md_vec;
+		cc_vec_string md_vec;
 		utility::delete_char(multi_md, '\n');
 		utility::split(multi_md, ';', md_vec, true);
 
 		for (auto md : md_vec) {
 			if (!decode_market_one(md, market_vec)) { continue; }
 		}
-		
+
+		return true;
+	}
+	static bool decode_code_jp_name(std::string& code_jp_name_data, std::vector<stock_basic>& code_jp_name_vec) {
+		std::string info;
+		utility::subsplit(code_jp_name_data, '"', info);
+        cc_vec_string field;
+		utility::split(info, ',', field);
+        code_jp_name_vec.push_back(stock_basic(field[2], field[5], encoding::gbk_to_utf8(field[4]), field[0]));
+
 		return true;
 	}
 private:
@@ -64,16 +89,16 @@ private:
 			return false;
 		}
 
-		std::vector<std::string> field;
+		cc_vec_string field;
 		utility::split(md, ',', field);
-	
+
 		stock_.name			= encoding::gbk_to_utf8(field[0]);
 		stock_.open_price	= std::stod(field[1]);
 		stock_.close_price	= std::stod(field[2]);
 		stock_.curr_price	= std::stod(field[3]);
 		stock_.high_price	= std::stod(field[4]);
 		stock_.low_price	= std::stod(field[5]);
-		
+
 		stock_.buy_price[0]		= std::stod(field[6]);
 		stock_.sell_price[0]	= std::stod(field[7]);
 
@@ -90,7 +115,7 @@ private:
 		stock_.buy_price[3] = std::stod(field[17]);
 		stock_.buy_qty[4]	= std::stod(field[18]);
 		stock_.buy_price[4] = std::stod(field[19]);
-		
+
 		stock_.sell_qty[0]		= std::stod(field[20]);
 		stock_.sell_price[0]	= std::stod(field[21]);
 		stock_.sell_qty[1]		= std::stod(field[22]);
@@ -104,11 +129,11 @@ private:
 
 		stock_.date = field[30];
 		stock_.time = field[31];
-		
+
 	    stock_.inc =  (stock_.curr_price - stock_.close_price) / stock_.close_price;
 
         if (stock_.curr_price != 0.0 || all)
-		    stock_vec.push_back(stock_);	
+		    stock_vec.push_back(stock_);
 
 		return true;
 	}
@@ -117,7 +142,7 @@ private:
 		std::string md;
 		utility::subsplit(data, '"', md);
 
-		std::vector<std::string> field;
+		cc_vec_string field;
 		utility::split(md, ',', field);
         market market_;
         market_.name        = encoding::gbk_to_utf8(field[0]);
