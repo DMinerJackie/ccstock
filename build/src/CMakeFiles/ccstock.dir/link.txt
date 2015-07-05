@@ -1,1 +1,0 @@
-/usr/bin/c++   -g    CMakeFiles/ccstock.dir/ccstock.cpp.o  -o ../bin/ccstock -rdynamic -lev -lcurl -lboost_system -lboost_filesystem -lboost_program_options 

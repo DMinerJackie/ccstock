@@ -1,2 +1,0 @@
-/home/steve/Documents/workspace/stock/build/src/CMakeFiles/ccstock.dir
-/home/steve/Documents/workspace/stock/build/src/test/CMakeFiles/test_ev.dir
