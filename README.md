@@ -3,8 +3,9 @@
 ###依赖列表
 使用C++(11)开发,第三方库如下:
 
-1. Boost库
-2. libcurl库
+1. Boost
+2. libcurl
+3. libev
 
 ###编译
 `build/bin/`下有编译好的程序,手动编译如下:

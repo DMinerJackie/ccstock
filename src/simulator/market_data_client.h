@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 00时13分41秒
-*Last Modified: 2015年07月06日 星期一 00时45分57秒
+*Last Modified: 2015年07月06日 星期一 11时37分19秒
 *Purpose:
 **/
 
@@ -33,6 +33,9 @@
 
 namespace simulator {
 
+struct ev_timer_udata {
+    ev_timer timeout_watcher;
+};
 template <typename code_db>
 class market_data_client {
 public:
@@ -48,16 +51,11 @@ public:
     market_data_client(configurator* config_):
         config(config_),
         db(new code_db())
+        
     {
         code_path = config->get_value("stock.market_data.code.code_path", std::string());
         option_path = config->get_value("stock.market_data.code.option_path", std::string());
-
-        if (ev_loop_ == NULL) {
-            ev_loop_ = ev_loop_new(EVFLAG_AUTO);
-            if (ev_loop_ == NULL) {
-                logger::log_debug("Can't creat loop");
-            }
-        }
+        ev_loop_ = EV_DEFAULT;
     }
     // 检查数据文件是否存在
     bool check_prerequisite()
@@ -132,15 +130,15 @@ public:
         file_handler::read_option(code_vec, option_path);
         crawler_.list_stock(code_vec, stock_vec);
         display_basic();
-        ev_timer_init(&timeout_watcher, &market_data_client::timeout_cb, 5.5, 0.);
-        ev_timer_start(ev_loop_, &timeout_watcher);
+        ev_timer_init(&timer_data.timeout_watcher, market_data_client::timeout_cb, 1.5, 1);
+        ev_timer_start(ev_loop_, &timer_data.timeout_watcher);
         ev_run(ev_loop_, 0);
     }
 private:
     static void timeout_cb(EV_P_ ev_timer *w, int revents)
     {
+        ev_timer_udata* data = (ev_timer_udata*) w;
         logger::log_info("timeout!");
-        ev_break(EV_A_ EVBREAK_ONE);
     }
 public:
     void gen_code()
@@ -297,8 +295,9 @@ private:
 private:
     code_db* db;
 private:
-    ev_timer timeout_watcher;
+    // ev_timer timeout_watcher;
     struct ev_loop *ev_loop_;
+    ev_timer_udata timer_data;
 };
 
 }
