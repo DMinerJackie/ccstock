@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 00时13分41秒
-*Last Modified: 2015年07月06日 星期一 00时33分31秒
+*Last Modified: 2015年07月06日 星期一 21时54分22秒
 *Purpose:
 **/
 
@@ -18,7 +18,7 @@ public:
     }
     void show_stock_data(const std::string& code)
     {
-        md_client_.show_md(code);
+        md_client_.show_stock(code);
     }
     void show_market()
     {
@@ -46,7 +46,6 @@ private:
 
 int main(int argc, char* argv[]) {
     configurator *configurator_ = new configurator();
-    configurator_->add_plain_option("init", "初始化系统，生成股票代码／简拼／名称");
     configurator_->add_option("code,a", "查看个股信息，代码用','分开", std::string());
     configurator_->add_option("config,c", "设置配置文件", std::string());
     configurator_->add_option("data,d", "批量显示行情", std::string());

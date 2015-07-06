@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 00时13分41秒
-*Last Modified: 2015年07月05日 星期日 01时03分58秒
+*Last Modified: 2015年07月06日 星期一 23时27分54秒
 *Purpose:
 **/
 
@@ -9,9 +9,11 @@
 #define STOCK_H_
 
 #include <string>
+#include <vector>
 #include <array>
 #include <utility>
 #include <cstddef>
+#include <functional>
 
 namespace simulator {
 
@@ -72,5 +74,9 @@ struct market {
 };
 
 }
+
+using display_stock_cb_t = std::function<void(std::vector<simulator::stock>&)>;
+using display_stock_basic_cb_t = std::function<void(std::vector<simulator::stock_basic>&)>;
+using display_market_cb_t = std::function<void(std::vector<simulator::market>&)>;
 
 #endif
