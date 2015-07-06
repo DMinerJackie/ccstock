@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月06日 星期一 20时14分24秒
-*Last Modified: 2015年07月06日 星期一 21时45分13秒
+*Last Modified: 2015年07月06日 星期一 23时53分26秒
 *Purpose: 爬虫基类
 **/
 #ifndef COMMON_CRAWLER_H_

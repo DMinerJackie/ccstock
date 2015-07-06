@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月06日 星期一 19时56分34秒
-*Last Modified: 2015年07月06日 星期一 23时33分27秒
+*Last Modified: 2015年07月06日 星期一 23时53分39秒
 *Purpose:
 **/
 #ifndef MARKET_DATA_CRAWLER_H_
@@ -32,13 +32,13 @@ private:
     };
 public:
     using self_type = market_data_crawler;
-	using decoder	= sina_decoder;
+    using decoder   = sina_decoder;
     using stock     = simulator::stock;
     using stock_basic = simulator::stock_basic;
-    using market 	= simulator::market;
-	using logger	= common::logger;
+    using market    = simulator::market;
+    using logger    = common::logger;
 public:
-	market_data_crawler() 
+    market_data_crawler() 
     {
         ev_loop_ = EV_DEFAULT;
     }
@@ -69,12 +69,12 @@ private:
     {
         ev_timer_wrapper *wrapper = (ev_timer_wrapper*) w;
         market_data_crawler* crawler_ = wrapper->crawler_;
-		string stock_data;
+        string stock_data;
         std::vector<stock> stock_vec;
         crawler_->crawler_content(stock_data, std::bind(&self_type::get_qry_str,
                     crawler_,
                     std::placeholders::_1));
-    	decoder::decode(stock_data, stock_vec);
+        decoder::decode(stock_data, stock_vec);
         crawler_->display_stock(stock_vec); 
     }
     static void market_timeout_cb(EV_P_ ev_timer *w, int)
@@ -101,30 +101,30 @@ private:
 private:
     // 获取URL列表-未加上sh/sz前缀
     bool get_qry_str(string& qry_str) {
-		qry_str += "http://hq.sinajs.cn/list=";
-		bool first = false;
-		for (auto code : code_vec) {
-			if (code.length() != 6) {
-				logger::code_error(code);
-				return false;
-			}
-			if (first)  { qry_str += ','; }
-			else { first = true; }
-			if (code[0] == '0' || code[0] == '3') {
-				qry_str += "sz" + code;
-			} else if (code[0] == '6') {
-				qry_str += "sh" + code;
-			} else {
-				logger::code_error(code);
-				return false;
-			}
-		}
-		return true;
-	}
+        qry_str += "http://hq.sinajs.cn/list=";
+        bool first = false;
+        for (auto code : code_vec) {
+            if (code.length() != 6) {
+                logger::code_error(code);
+                return false;
+            }
+            if (first)  { qry_str += ','; }
+            else { first = true; }
+            if (code[0] == '0' || code[0] == '3') {
+                qry_str += "sz" + code;
+            } else if (code[0] == '6') {
+                qry_str += "sh" + code;
+            } else {
+                logger::code_error(code);
+                return false;
+            }
+        }
+        return true;
+    }
     // 获取URL列表-已加上sh/sz前缀
     bool get_plain_qry_str(string& qry_str)
     {
-		qry_str += "http://hq.sinajs.cn/list=";
+        qry_str += "http://hq.sinajs.cn/list=";
         for (auto code : code_vec) {
             qry_str += code + ",";
         }

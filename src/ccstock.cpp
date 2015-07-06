@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 00时13分41秒
-*Last Modified: 2015年07月06日 星期一 21时54分22秒
+*Last Modified: 2015年07月06日 星期一 23时54分32秒
 *Purpose:
 **/
 
@@ -62,7 +62,7 @@ int main(int argc, char* argv[]) {
         return 0;
     }
 
-	stock_service service(configurator_);
+    stock_service service(configurator_);
     if (configurator_->is_option_set("code")) {
         service.show_stock_data(configurator_->get_string_option("code"));        
     }
@@ -93,5 +93,5 @@ int main(int argc, char* argv[]) {
                 order);
     }
 
-	return 0;
+    return 0;
 }

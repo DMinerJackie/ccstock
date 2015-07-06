@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 00时13分41秒
-*Last Modified: 2015年07月03日 星期五 23时18分28秒
+*Last Modified: 2015年07月06日 星期一 23时52分51秒
 *Purpose:
 **/
 
@@ -15,14 +15,14 @@
 
 namespace common {
 
-const char* CURR_P		= "现价";
-const char* OPEN_P		= "今开";
-const char* CLOSE_P		= "昨收";
-const char* HIGH_P		= "最高";
-const char* LOW_P		= "最低";
+const char* CURR_P      = "现价";
+const char* OPEN_P      = "今开";
+const char* CLOSE_P     = "昨收";
+const char* HIGH_P      = "最高";
+const char* LOW_P       = "最低";
 
-const char* VOL			= "成交量";
-const char* TO			= "成交额";
+const char* VOL         = "成交量";
+const char* TO          = "成交额";
 
 }
 

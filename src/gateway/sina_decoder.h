@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 00时13分41秒
-*Last Modified: 2015年07月05日 星期日 00时51分36秒
+*Last Modified: 2015年07月06日 星期一 23时53分43秒
 *Purpose:
 **/
 
@@ -26,124 +26,124 @@ class sina_decoder {
 public:
     using stock         = simulator::stock;
     using stock_basic   = simulator::stock_basic;
-    using market 		= simulator::market;
-	using arr5			= std::array<double, 5>;
-	using encoding		= common::encoding;
-	using utility		= common::utility;
-	using logger		= common::logger;
+    using market        = simulator::market;
+    using arr5          = std::array<double, 5>;
+    using encoding      = common::encoding;
+    using utility       = common::utility;
+    using logger        = common::logger;
 
 public:
-	static void decode_code(std::string& code_data, cc_vec_string& final_code) {
+    static void decode_code(std::string& code_data, cc_vec_string& final_code) {
         cc_vec_string code_data_vec;
-		utility::delete_char(code_data, '\n');
-		utility::split(code_data, ';', code_data_vec, true);
+        utility::delete_char(code_data, '\n');
+        utility::split(code_data, ';', code_data_vec, true);
         for (auto data : code_data_vec) {
-	    	std::string info;
-			utility::subsplit(data, '"', info);
-			if (info != "") {
+            std::string info;
+            utility::subsplit(data, '"', info);
+            if (info != "") {
                 final_code.push_back(data.substr(15, 6));
-			}
+            }
         }
     }
-	static bool decode(std::string& multi_md, std::vector<stock>& stock_vec) {
-		cc_vec_string md_vec;
-		utility::delete_char(multi_md, '\n');
-		utility::split(multi_md, ';', md_vec, true);
+    static bool decode(std::string& multi_md, std::vector<stock>& stock_vec) {
+        cc_vec_string md_vec;
+        utility::delete_char(multi_md, '\n');
+        utility::split(multi_md, ';', md_vec, true);
 
-		for (auto md : md_vec) {
-			if (!decode_one(md, stock_vec)) { continue; }
-		}
+        for (auto md : md_vec) {
+            if (!decode_one(md, stock_vec)) { continue; }
+        }
 
-		return true;
-	}
-	static bool decode_market(std::string& multi_md, std::vector<market>& market_vec) {
-		cc_vec_string md_vec;
-		utility::delete_char(multi_md, '\n');
-		utility::split(multi_md, ';', md_vec, true);
+        return true;
+    }
+    static bool decode_market(std::string& multi_md, std::vector<market>& market_vec) {
+        cc_vec_string md_vec;
+        utility::delete_char(multi_md, '\n');
+        utility::split(multi_md, ';', md_vec, true);
 
-		for (auto md : md_vec) {
-			if (!decode_market_one(md, market_vec)) { continue; }
-		}
+        for (auto md : md_vec) {
+            if (!decode_market_one(md, market_vec)) { continue; }
+        }
 
-		return true;
-	}
-	static bool decode_code_jp_name(std::string& code_jp_name_data, std::vector<stock_basic>& code_jp_name_vec) {
-		std::string info;
-		utility::subsplit(code_jp_name_data, '"', info);
+        return true;
+    }
+    static bool decode_code_jp_name(std::string& code_jp_name_data, std::vector<stock_basic>& code_jp_name_vec) {
+        std::string info;
+        utility::subsplit(code_jp_name_data, '"', info);
         cc_vec_string field;
-		utility::split(info, ',', field);
+        utility::split(info, ',', field);
         code_jp_name_vec.push_back(stock_basic(field[2], field[5], encoding::gbk_to_utf8(field[4]), field[0]));
 
-		return true;
-	}
+        return true;
+    }
 private:
-	static bool decode_one(const std::string& data, std::vector<stock>& stock_vec, bool all = false) {
-		stock stock_;
-		stock_.code = data.substr(13, 6);
+    static bool decode_one(const std::string& data, std::vector<stock>& stock_vec, bool all = false) {
+        stock stock_;
+        stock_.code = data.substr(13, 6);
 
-		std::string md;
-		utility::subsplit(data, '"', md);
+        std::string md;
+        utility::subsplit(data, '"', md);
 
-		if (md == "") {
-			logger::code_error(stock_.code);
-			return false;
-		}
+        if (md == "") {
+            logger::code_error(stock_.code);
+            return false;
+        }
 
-		cc_vec_string field;
-		utility::split(md, ',', field);
+        cc_vec_string field;
+        utility::split(md, ',', field);
 
-		stock_.name			= encoding::gbk_to_utf8(field[0]);
-		stock_.open_price	= std::stod(field[1]);
-		stock_.close_price	= std::stod(field[2]);
-		stock_.curr_price	= std::stod(field[3]);
-		stock_.high_price	= std::stod(field[4]);
-		stock_.low_price	= std::stod(field[5]);
+        stock_.name         = encoding::gbk_to_utf8(field[0]);
+        stock_.open_price   = std::stod(field[1]);
+        stock_.close_price  = std::stod(field[2]);
+        stock_.curr_price   = std::stod(field[3]);
+        stock_.high_price   = std::stod(field[4]);
+        stock_.low_price    = std::stod(field[5]);
 
-		stock_.buy_price[0]		= std::stod(field[6]);
-		stock_.sell_price[0]	= std::stod(field[7]);
+        stock_.buy_price[0]     = std::stod(field[6]);
+        stock_.sell_price[0]    = std::stod(field[7]);
 
-		stock_.volumn	= std::stod(field[8]);
-		stock_.turnover = std::stod(field[9]);
+        stock_.volumn   = std::stod(field[8]);
+        stock_.turnover = std::stod(field[9]);
 
-		stock_.buy_qty[0]	= std::stod(field[10]);
-		stock_.buy_price[0] = std::stod(field[11]);
-		stock_.buy_qty[1]	= std::stod(field[12]);
-		stock_.buy_price[1] = std::stod(field[13]);
-		stock_.buy_qty[2]	= std::stod(field[14]);
-		stock_.buy_price[2] = std::stod(field[15]);
-		stock_.buy_qty[3]	= std::stod(field[16]);
-		stock_.buy_price[3] = std::stod(field[17]);
-		stock_.buy_qty[4]	= std::stod(field[18]);
-		stock_.buy_price[4] = std::stod(field[19]);
+        stock_.buy_qty[0]   = std::stod(field[10]);
+        stock_.buy_price[0] = std::stod(field[11]);
+        stock_.buy_qty[1]   = std::stod(field[12]);
+        stock_.buy_price[1] = std::stod(field[13]);
+        stock_.buy_qty[2]   = std::stod(field[14]);
+        stock_.buy_price[2] = std::stod(field[15]);
+        stock_.buy_qty[3]   = std::stod(field[16]);
+        stock_.buy_price[3] = std::stod(field[17]);
+        stock_.buy_qty[4]   = std::stod(field[18]);
+        stock_.buy_price[4] = std::stod(field[19]);
 
-		stock_.sell_qty[0]		= std::stod(field[20]);
-		stock_.sell_price[0]	= std::stod(field[21]);
-		stock_.sell_qty[1]		= std::stod(field[22]);
-		stock_.sell_price[1]	= std::stod(field[23]);
-		stock_.sell_qty[2]		= std::stod(field[24]);
-		stock_.sell_price[2]	= std::stod(field[25]);
-		stock_.sell_qty[3]		= std::stod(field[26]);
-		stock_.sell_price[3]	= std::stod(field[27]);
-		stock_.sell_qty[4]		= std::stod(field[28]);
-		stock_.sell_price[4]	= std::stod(field[29]);
+        stock_.sell_qty[0]      = std::stod(field[20]);
+        stock_.sell_price[0]    = std::stod(field[21]);
+        stock_.sell_qty[1]      = std::stod(field[22]);
+        stock_.sell_price[1]    = std::stod(field[23]);
+        stock_.sell_qty[2]      = std::stod(field[24]);
+        stock_.sell_price[2]    = std::stod(field[25]);
+        stock_.sell_qty[3]      = std::stod(field[26]);
+        stock_.sell_price[3]    = std::stod(field[27]);
+        stock_.sell_qty[4]      = std::stod(field[28]);
+        stock_.sell_price[4]    = std::stod(field[29]);
 
-		stock_.date = field[30];
-		stock_.time = field[31];
+        stock_.date = field[30];
+        stock_.time = field[31];
 
-	    stock_.inc =  (stock_.curr_price - stock_.close_price) / stock_.close_price;
+        stock_.inc =  (stock_.curr_price - stock_.close_price) / stock_.close_price;
 
         if (stock_.curr_price != 0.0 || all)
-		    stock_vec.push_back(stock_);
+            stock_vec.push_back(stock_);
 
-		return true;
-	}
+        return true;
+    }
     static bool decode_market_one(const std::string& data, std::vector<market>& market_vec)
     {
-		std::string md;
-		utility::subsplit(data, '"', md);
+        std::string md;
+        utility::subsplit(data, '"', md);
 
-		cc_vec_string field;
-		utility::split(md, ',', field);
+        cc_vec_string field;
+        utility::split(md, ',', field);
         market market_;
         market_.name        = encoding::gbk_to_utf8(field[0]);
         market_.index       = std::stod(field[1]);

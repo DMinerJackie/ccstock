@@ -4,7 +4,7 @@ INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
 SET( CMAKE_BUILD_TYPE Debug )
 
 ADD_DEFINITIONS (
-	-std=c++11
+    -std=c++11
 )
 
 ADD_EXECUTABLE(test_ev test_ev.cpp)

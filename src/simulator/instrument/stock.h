@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 00时13分41秒
-*Last Modified: 2015年07月06日 星期一 23时27分54秒
+*Last Modified: 2015年07月06日 星期一 23时53分57秒
 *Purpose:
 **/
 
@@ -19,32 +19,32 @@ namespace simulator {
 
 class stock {
 public:
-	using arr5 = std::array<double, 5>;
+    using arr5 = std::array<double, 5>;
 
 public:
-	inline std::pair<arr5, arr5> get_buyer() const { return std::make_pair(buy_price, buy_qty); }
-	inline std::pair<arr5, arr5> get_seller() const { return std::make_pair(sell_price, sell_qty); }
+    inline std::pair<arr5, arr5> get_buyer() const { return std::make_pair(buy_price, buy_qty); }
+    inline std::pair<arr5, arr5> get_seller() const { return std::make_pair(sell_price, sell_qty); }
 
 public:
-	double get_inc() const { return (curr_price - close_price) / close_price; }
+    double get_inc() const { return (curr_price - close_price) / close_price; }
 public:
-	std::string name;
-	std::string code;
-	double open_price;
-	double close_price;
-	double high_price;
-	double low_price;
-	double curr_price;
-	double volumn; // 成交量
-	double turnover; // 成交金额
+    std::string name;
+    std::string code;
+    double open_price;
+    double close_price;
+    double high_price;
+    double low_price;
+    double curr_price;
+    double volumn; // 成交量
+    double turnover; // 成交金额
 
-	arr5 buy_price;
-	arr5 buy_qty;
-	arr5 sell_price;
-	arr5 sell_qty;
+    arr5 buy_price;
+    arr5 buy_qty;
+    arr5 sell_price;
+    arr5 sell_qty;
 
-	std::string date;
-	std::string time;
+    std::string date;
+    std::string time;
 
     double inc; // 涨跌幅
 };

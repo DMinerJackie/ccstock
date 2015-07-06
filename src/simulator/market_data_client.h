@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 00时13分41秒
-*Last Modified: 2015年07月06日 星期一 23时40分50秒
+*Last Modified: 2015年07月06日 星期一 23时54分15秒
 *Purpose:
 **/
 
@@ -36,9 +36,9 @@ class market_data_client {
 public:
     using self_type     = market_data_client<code_db, md_crawler>;
     using crawler       = gateway::crawler;
-	using displayer		= simulator::cmd_display;
-	using file_handler	= simulator::file_handler;
-	using utility		= common::utility;
+    using displayer     = simulator::cmd_display;
+    using file_handler  = simulator::file_handler;
+    using utility       = common::utility;
     using configurator  = common::configurator;
     using logger        = common::logger;
     using io_aux        = common::io_aux;
@@ -79,15 +79,15 @@ public:
         file_handler::save_code_jp_name(code_jp_name_vec, code_path);
     }
     // 查看个股信息
-	void show_stock(const std::string& code_str)
-	{
+    void show_stock(const std::string& code_str)
+    {
         code_vec.clear();
         utility::split(code_str, ',', code_vec);
-		md_crawler_.get_stock_data(code_vec, 
+        md_crawler_.get_stock_data(code_vec, 
                 std::bind(&self_type::display_stock,
                     this,
                     std::placeholders::_1));
-	}
+    }
     // 查看大盘行情
     void show_market()
     {
@@ -159,7 +159,7 @@ public:
 
         all_code.insert(all_code.end(), sz_code.begin(), sz_code.end());
         all_code.insert(all_code.end(), sh_code.begin(), sh_code.end());
-		file_handler::save_code(all_code, code_path, "all_code.ds");
+        file_handler::save_code(all_code, code_path, "all_code.ds");
         logger::log_info("A股市场股票代码生成完毕！");
     }
 private:
@@ -222,8 +222,8 @@ private:
         }
         return true;
     }
-	void gen_code_bk(cc_vec_string& final_code, cc_vec_string& init_code, const std::string& bk)
-	{
+    void gen_code_bk(cc_vec_string& final_code, cc_vec_string& init_code, const std::string& bk)
+    {
         uint32_t idx = 0;
         uint32_t speed = config->get_value("stock.market_data.request_speed", uint32_t());
         cc_vec_string sub_code;
@@ -233,40 +233,40 @@ private:
         if (!sub_code.empty()) {
             crawler_.list_code(sub_code, final_code);
         }
-		file_handler::save_code(final_code, code_path, bk + "_code.ds");
-	}
-	void gen_code_sh(cc_vec_string& codes)
-	{
+        file_handler::save_code(final_code, code_path, bk + "_code.ds");
+    }
+    void gen_code_sh(cc_vec_string& codes)
+    {
         int beg = config->get_value("stock.market_data.code.sh.beg", int());
         int end = config->get_value("stock.market_data.code.sh.end", int());
         utility::gen_range_str(beg, end, codes);
-	}
-	void gen_code_sz(cc_vec_string& codes)
-	{
+    }
+    void gen_code_sz(cc_vec_string& codes)
+    {
         int beg = config->get_value("stock.market_data.code.sz.beg", int());
         int end = config->get_value("stock.market_data.code.sz.end", int());
         utility::gen_range_str(beg, end, codes);
         config->get_multi_value("stock.market_data.code.sz.specials", codes);
     }
-	void gen_code_zxb(cc_vec_string& codes)
-	{
+    void gen_code_zxb(cc_vec_string& codes)
+    {
         int beg = config->get_value("stock.market_data.code.sz.zxb.beg", int());
         int end = config->get_value("stock.market_data.code.sz.zxb.end", int());
         utility::gen_range_str(beg, end, codes);
-	}
-	void gen_code_cyb(cc_vec_string& codes)
+    }
+    void gen_code_cyb(cc_vec_string& codes)
     {
         int beg = config->get_value("stock.market_data.code.sz.cyb.beg", int());
         int end = config->get_value("stock.market_data.code.sz.cyb.end", int());
         utility::gen_range_str(beg, end, codes);
-	}
+    }
 private:
-	void display() {
-		displayer::stock_info(stock_vec);
-	}
-	void display_stock(std::vector<stock>& stock_vec) {
-		displayer::stock_info(stock_vec);
-	}
+    void display() {
+        displayer::stock_info(stock_vec);
+    }
+    void display_stock(std::vector<stock>& stock_vec) {
+        displayer::stock_info(stock_vec);
+    }
     void display_market(std::vector<market>& market_vec) {
         displayer::market_info(market_vec);
     }
@@ -278,15 +278,15 @@ private:
         }
     }
 private:
-	crawler crawler_;
+    crawler crawler_;
     md_crawler md_crawler_;
-	cc_vec_string code_vec;
+    cc_vec_string code_vec;
 
     std::string code_path; // 股票代码文件存放
     std::string option_path; // 自选股代码存放
 
-	std::vector<stock> stock_vec;
-	std::vector<market> market_vec;
+    std::vector<stock> stock_vec;
+    std::vector<market> market_vec;
     gen_code_map gen_code_map_;
     std::shared_ptr<configurator> config;
 private:
