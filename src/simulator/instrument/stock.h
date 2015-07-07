@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 00时13分41秒
-*Last Modified: 2015年07月06日 星期一 23时53分57秒
+*Last Modified: 2015年07月07日 星期二 21时25分31秒
 *Purpose:
 **/
 
@@ -78,5 +78,7 @@ struct market {
 using display_stock_cb_t = std::function<void(std::vector<simulator::stock>&)>;
 using display_stock_basic_cb_t = std::function<void(std::vector<simulator::stock_basic>&)>;
 using display_market_cb_t = std::function<void(std::vector<simulator::market>&)>;
+
+using select_stock_cb_t = std::function<void(uint32_t, std::string&, std::vector<simulator::stock>&)>;
 
 #endif

@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 00时13分41秒
-*Last Modified: 2015年07月06日 星期一 23时54分15秒
+*Last Modified: 2015年07月07日 星期二 22时22分17秒
 *Purpose:
 **/
 
@@ -87,6 +87,7 @@ public:
                 std::bind(&self_type::display_stock,
                     this,
                     std::placeholders::_1));
+        md_crawler_.run();
     }
     // 查看大盘行情
     void show_market()
@@ -97,22 +98,19 @@ public:
                 std::bind(&self_type::display_market,
                     this,
                     std::placeholders::_1));
+        md_crawler_.run();
     }
     // 查看板块行情
     void show_md_bk(const std::string& bk, uint32_t speed, int32_t top_num, std::string& order)
     {
-        // file_handler::read_code(code_vec, code_path, bk);
-        // cc_vec_string sub_code;
-        // uint32_t idx = 0;
-        // while (utility::get_vec_by_step(code_vec, idx, speed, sub_code)) {
-        //     md_crawler_.get_stock_data(sub_code, stock_vec);
-        //     logger::log_debug_variadic("get stock ", idx - speed, "-", idx, " finished!");
-        // }
-        // if (!sub_code.empty()) {
-        //     crawler_.list_stock(sub_code, stock_vec);
-        // }
-        // select_stock(top_num, order);
-        // display_basic(top_num);
+        code_vec.clear();
+        file_handler::read_code(code_vec, code_path, bk);
+        md_crawler_.get_bk_data(code_vec, speed, top_num, order,
+                std::bind(&self_type::display_stock, this, std::placeholders::_1),
+                std::bind(&self_type::select_stock, this, std::placeholders::_1, 
+                    std::placeholders::_2,
+                    std::placeholders::_3));
+        md_crawler_.run();
     }
     void add_option(const std::string& options)
     {
@@ -163,7 +161,7 @@ public:
         logger::log_info("A股市场股票代码生成完毕！");
     }
 private:
-    bool select_stock(int32_t top_num, std::string& order)
+    bool select_stock(int32_t top_num, std::string& order, std::vector<stock>& stock_vec)
     {
         if (top_num == -1) top_num = stock_vec.size();
 
@@ -220,6 +218,7 @@ private:
             logger::log_error("排序标准有问题!");
             return false;
         }
+        stock_vec = std::vector<stock>(stock_vec.begin(), stock_vec.begin() + top_num);
         return true;
     }
     void gen_code_bk(cc_vec_string& final_code, cc_vec_string& init_code, const std::string& bk)
