@@ -1,25 +1,41 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 00时13分41秒
-*Last Modified: 2015年07月06日 星期一 23时54分32秒
+*Last Modified: 2015年07月09日 星期四 15时53分07秒
 *Purpose:
 **/
 
 #include <iostream>
 #include <string>
+#include <memory> // shared_ptr
 
 #include "ccstock_config.h"
 
 class stock_service {
 public:
-    stock_service(configurator* config_): md_client_(config_)
+    stock_service(shared_ptr<configurator> config_): 
+        md_client_(config_),
+        code_initializer_(config_),
+        db(new code_db)
     {
+        // 股票代码存放路径
+        code_path = config_->get_value("stock.market_data.code.code_path", std::string());
+        // 读取所有上市公司股票代码信息
+        db->configure(code_path);
+        // 生成股票代码相关文件
+        code_initializer_.run();
+        // 初始化行情客户端
         md_client_.initialize();
+        //自选股管理器
+        option_manager_.configure(db, 
+                config_->get_value("stock.market_data.code.option_path", std::string()));
     }
+    // 显示个股行情
     void show_stock_data(const std::string& code)
     {
         md_client_.show_stock(code);
     }
+    // 显示大盘行情
     void show_market()
     {
         md_client_.show_market();
@@ -30,22 +46,28 @@ public:
     }
     void add_option(const std::string& options)
     {
-        md_client_.add_option(options);
+        option_manager_.add_option(options);
     }
     void del_option(const std::string& options)
     {
-        md_client_.del_option(options);
+        option_manager_.del_option(options);
     }
     void show_option()
     {
-        md_client_.show_option();
+        option_manager_.show_option();
     }
 private:
     md_client md_client_;
+    code_initializer code_initializer_;
+    option_manager_t option_manager_;
+    // 股票代码数据
+    shared_ptr<code_db> db;
+private:
+    std::string code_path;
 };
 
 int main(int argc, char* argv[]) {
-    configurator *configurator_ = new configurator();
+    shared_ptr<configurator> configurator_ (new configurator());
     configurator_->add_option("code,a", "查看个股信息，代码用','分开", std::string());
     configurator_->add_option("config,c", "设置配置文件", std::string());
     configurator_->add_option("data,d", "批量显示行情", std::string());

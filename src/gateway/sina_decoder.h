@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 00时13分41秒
-*Last Modified: 2015年07月06日 星期一 23时53分43秒
+*Last Modified: 2015年07月09日 星期四 15时59分45秒
 *Purpose:
 **/
 
@@ -45,13 +45,13 @@ public:
             }
         }
     }
-    static bool decode(std::string& multi_md, std::vector<stock>& stock_vec) {
+    static bool decode(std::string& multi_md, std::vector<stock>& stock_vec, bool all = false) {
         cc_vec_string md_vec;
         utility::delete_char(multi_md, '\n');
         utility::split(multi_md, ';', md_vec, true);
 
         for (auto md : md_vec) {
-            if (!decode_one(md, stock_vec)) { continue; }
+            if (!decode_one(md, stock_vec, all)) { continue; }
         }
 
         return true;

@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月06日 星期一 20时14分24秒
-*Last Modified: 2015年07月06日 星期一 23时53分26秒
+*Last Modified: 2015年07月07日 星期二 23时11分00秒
 *Purpose: 爬虫基类
 **/
 #ifndef COMMON_CRAWLER_H_
@@ -11,22 +11,20 @@
 
 #include <curl/curl.h>
 
-#include "common/utility.h"
 #include "common/logger.h"
 #include "common/common_defs.h"
 
 namespace gateway {
 
 class common_crawler {
-public:
-    using logger    = common::logger;
-    using utility   = common::utility;
+protected:
+    using logger = common::logger;
 public:
     common_crawler() {}
     // 获取数据
     bool crawler_content(std::string& user_data, gen_qry_str_func qry_str_func) {
         CURL *curl = curl_easy_init();
-        string qry_str;
+        std::string qry_str;
         if (!qry_str_func(qry_str)) { return false; }
         if (curl) {
             CURLcode res;
@@ -40,7 +38,7 @@ public:
     }
 protected:
     // 获取URL地址，须有子类实现
-    virtual bool get_qry_str(string&) = 0;
+    virtual bool get_qry_str(std::string&) = 0;
     // 设置URL参数
     bool set_code_vec(const cc_vec_string& code_vec_)
     {

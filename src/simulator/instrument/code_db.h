@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月04日 星期六 22时34分11秒
-*Last Modified: 2015年07月06日 星期一 23时53分49秒
+*Last Modified: 2015年07月09日 星期四 14时24分46秒
 *Purpose:
 **/
 #ifndef CODE_DB_H_
@@ -15,10 +15,13 @@
 #include "stock.h"
 #include "simulator/file_handler.h"
 
+#include "common/logger.h"
+
 namespace simulator {
 
 // 内存数据库，方便快速查找验证
 class code_db {
+    using logger = common::logger;
 public:
     //
     bool configure(const std::string& code_path)

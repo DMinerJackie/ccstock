@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月06日 星期一 19时56分34秒
-*Last Modified: 2015年07月07日 星期二 22时22分20秒
+*Last Modified: 2015年07月09日 星期四 15时59分22秒
 *Purpose:
 **/
 #ifndef MARKET_DATA_CRAWLER_H_
@@ -15,20 +15,20 @@
 #include <curl/curl.h>
 
 #include "common_crawler.h"
+#include "common/utility.h"
 
 #include "sina_decoder.h"
 #include "simulator/instrument/stock.h"
 
-#include "common/logger.h"
-
 namespace gateway {
 
-
 class market_data_crawler : public common_crawler {
+    using utility = common::utility;
 private:
     struct ev_timer_wrapper {
         ev_timer timeout_watcher;
         market_data_crawler* crawler_;
+        bool all; // 是否显示停牌股票
     };
     struct ev_timer_wrapper_bk : ev_timer_wrapper {
         uint32_t speed;
@@ -54,11 +54,12 @@ public:
         ev_run(ev_loop_, 0);
     }
     // 查看个股信息
-    bool get_stock_data(const cc_vec_string& code_vec, display_stock_cb_t display_stock_cb_)
+    bool get_stock_data(const cc_vec_string& code_vec, display_stock_cb_t display_stock_cb_, bool all = false)
     {
         set_code_vec(code_vec);
         display_stock_cb = display_stock_cb_;
         timer_wrapper.crawler_ = this;
+        timer_wrapper.all = all;
         ev_timer_init(&timer_wrapper.timeout_watcher, stock_timeout_cb, 1.5, 1);
         ev_timer_start(ev_loop_, &timer_wrapper.timeout_watcher);
         return true;
@@ -101,8 +102,8 @@ private:
         crawler_->crawler_content(stock_data, std::bind(&self_type::get_qry_str,
                     crawler_,
                     std::placeholders::_1));
-        decoder::decode(stock_data, stock_vec);
-        crawler_->display_stock(stock_vec); 
+        decoder::decode(stock_data, stock_vec, wrapper->all);
+        crawler_->display_stock_cb(stock_vec); 
     }
     static void bk_timeout_cb(EV_P_ ev_timer *w, int)
     {
@@ -116,7 +117,7 @@ private:
             crawler_->crawler_content(bk_data, std::bind(&self_type::get_qry_str,
                     crawler_,
                     std::placeholders::_1));
-            decoder::decode(bk_data, stock_vec);
+            decoder::decode(bk_data, stock_vec, true);
         }
         if (!crawler_->code_vec.empty()) {
             crawler_->crawler_content(bk_data, std::bind(&self_type::get_qry_str,
@@ -137,16 +138,7 @@ private:
                     crawler_,
                     std::placeholders::_1));
         decoder::decode_market(market_data, market_vec);
-        crawler_->display_market(market_vec); 
-    }
-private:
-    void display_stock(std::vector<stock>& stock_vec)
-    {
-        display_stock_cb(stock_vec);
-    }
-    void display_market(std::vector<market>& market_vec)
-    {
-        display_market_cb(market_vec);
+        crawler_->display_market_cb(market_vec); 
     }
 private:
     // 获取URL列表-未加上sh/sz前缀
