@@ -1,5 +1,7 @@
 build/*
 !build/bin/
 !build/bin/*
+build/bin/test
+src/test/*
 .*.swp
 .*.swo

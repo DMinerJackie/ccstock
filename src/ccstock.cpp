@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 00时13分41秒
-*Last Modified: 2015年07月09日 星期四 15时53分07秒
+*Last Modified: 2015年07月10日 星期五 23时21分33秒
 *Purpose:
 **/
 
@@ -18,12 +18,12 @@ public:
         code_initializer_(config_),
         db(new code_db)
     {
+        // 生成股票代码相关文件
+        code_initializer_.run();
         // 股票代码存放路径
         code_path = config_->get_value("stock.market_data.code.code_path", std::string());
         // 读取所有上市公司股票代码信息
         db->configure(code_path);
-        // 生成股票代码相关文件
-        code_initializer_.run();
         // 初始化行情客户端
         md_client_.initialize();
         //自选股管理器
@@ -57,8 +57,8 @@ public:
         option_manager_.show_option();
     }
 private:
-    md_client md_client_;
-    code_initializer code_initializer_;
+    md_client_t md_client_;
+    code_initializer_t code_initializer_;
     option_manager_t option_manager_;
     // 股票代码数据
     shared_ptr<code_db> db;
