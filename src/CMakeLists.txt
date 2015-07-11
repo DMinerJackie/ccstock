@@ -12,6 +12,7 @@ ADD_DEFINITIONS (
 ADD_EXECUTABLE(ccstock ccstock.cpp)
 
 TARGET_LINK_LIBRARIES(ccstock
+    ncurses
     ev
     curl
     boost_system
