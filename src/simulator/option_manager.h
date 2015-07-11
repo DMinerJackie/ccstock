@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月04日 星期六 23时57分03秒
-*Last Modified: 2015年07月09日 星期四 16时00分37秒
+*Last Modified: 2015年07月11日 星期六 20时27分36秒
 *Purpose: 自选股管理器
 **/
 
@@ -11,7 +11,6 @@
 #include <string>
 #include <memory>
 
-#include "cmd_display.h"
 #include "common/common_defs.h"
 #include "common/utility.h"
 
@@ -19,11 +18,10 @@
 
 namespace simulator {
 
-template <typename code_db, typename md_crawler>
+template <typename code_db, typename md_crawler, typename displayer>
 class option_manager {
     using utility = common::utility;
-    using displayer = cmd_display;
-    using self_type = option_manager<code_db, md_crawler>;
+    using self_type = option_manager<code_db, md_crawler, displayer>;
 public:
     void configure(const std::shared_ptr<code_db>& db_, const std::string& option_path_)
     {
@@ -57,12 +55,13 @@ public:
 private:
     void display_options(const std::vector<stock>& stock_vec)
     {
-        displayer::stock_info_basic(stock_vec);
+        displayer_.stock_info_basic(stock_vec);
     }
 private:
     std::string option_path;
     shared_ptr<code_db> db;
     md_crawler crawler_;
+    displayer displayer_;
 };
 
 }

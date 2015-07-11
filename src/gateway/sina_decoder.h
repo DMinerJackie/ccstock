@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 00时13分41秒
-*Last Modified: 2015年07月09日 星期四 15时59分45秒
+*Last Modified: 2015年07月11日 星期六 23时46分06秒
 *Purpose:
 **/
 
@@ -129,8 +129,15 @@ private:
 
         stock_.date = field[30];
         stock_.time = field[31];
-
-        stock_.inc =  (stock_.curr_price - stock_.close_price) / stock_.close_price;
+        
+        if (stock_.open_price != 0.0) {
+            stock_.inc_v    =  stock_.curr_price - stock_.close_price;
+            stock_.inc      =  stock_.inc_v / stock_.close_price;
+        }
+        else {
+            stock_.inc_v = 0.0;
+            stock_.inc   = 0.0;
+        }
 
         if (stock_.curr_price != 0.0 || all)
             stock_vec.push_back(stock_);

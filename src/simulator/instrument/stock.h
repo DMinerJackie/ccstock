@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 00时13分41秒
-*Last Modified: 2015年07月07日 星期二 21时25分31秒
+*Last Modified: 2015年07月11日 星期六 21时32分50秒
 *Purpose:
 **/
 
@@ -47,6 +47,7 @@ public:
     std::string time;
 
     double inc; // 涨跌幅
+    double inc_v; // 涨跌
 };
 
 struct stock_basic {
