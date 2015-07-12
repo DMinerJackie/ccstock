@@ -1,7 +1,5 @@
-/**
-*Author: Steve Zhong
-*Creation Date: 2015年06月22日 星期一 00时13分41秒
-*Last Modified: 2015年07月09日 星期四 11时02分51秒
+/** *Author: Steve Zhong *Creation Date: 2015年06月22日 星期一 00时13分41秒
+*Last Modified: 2015年07月13日 星期一 00时26分12秒
 *Purpose:
 **/
 
@@ -17,24 +15,21 @@
 #include <memory>
 #include <cstdint> // int32_t, uint32_t
 
+#include <simulator/file_handler.h>
+#include <common/utility.h>
+#include <common/io_aux.h>
+#include <common/configurator.h>
+#include <common/logger.h>
+#include <common/common_defs.h>
+
 #include "instrument/stock.h"
-
-#include "simulator/cmd_display.h"
-#include "simulator/file_handler.h"
-
-#include "common/utility.h"
-#include "common/io_aux.h"
-#include "common/configurator.h"
-#include "common/logger.h"
-#include "common/common_defs.h"
 
 namespace simulator {
 
-template <typename code_db, typename md_crawler>
+template <typename code_db, typename md_crawler, typename displayer>
 class market_data_client {
 public:
-    using self_type     = market_data_client<code_db, md_crawler>;
-    using displayer     = simulator::cmd_display;
+    using self_type     = market_data_client<code_db, md_crawler, displayer>;
     using file_handler  = simulator::file_handler;
     using utility       = common::utility;
     using configurator  = common::configurator;
@@ -57,11 +52,14 @@ public:
     {
         code_vec.clear();
         utility::split(code_str, ',', code_vec);
-        md_crawler_.get_stock_data(code_vec, 
-                std::bind(&self_type::display_stock,
-                    this,
-                    std::placeholders::_1));
-        md_crawler_.run();
+        if (db->from_jp_to_code(code_vec)) {
+            md_crawler_.get_stock_data(code_vec,
+                    std::bind(&self_type::display_stock,
+                        this,
+                        std::placeholders::_1,
+                        std::placeholders::_2));
+            md_crawler_.run();
+        }
     }
     // 查看大盘行情
     void show_market()
@@ -79,9 +77,9 @@ public:
     {
         code_vec.clear();
         file_handler::read_code(code_vec, code_path, bk);
-        md_crawler_.get_bk_data(code_vec, speed, top_num, order,
-                std::bind(&self_type::display_stock, this, std::placeholders::_1),
-                std::bind(&self_type::select_stock, this, std::placeholders::_1, 
+        md_crawler_.get_bk_data(bk, code_vec, speed, top_num, order,
+                std::bind(&self_type::display_stock, this, std::placeholders::_1, std::placeholders::_2),
+                std::bind(&self_type::select_stock, this, std::placeholders::_1,
                     std::placeholders::_2,
                     std::placeholders::_3));
         md_crawler_.run();
@@ -148,11 +146,11 @@ private:
         return true;
     }
 private:
-    void display_stock(std::vector<stock>& stock_vec) {
-        displayer::stock_info(stock_vec);
+    void display_stock(std::vector<stock>& stock_vec, const std::string& header_name) {
+        displayer_.print_stock(stock_vec, header_name.c_str());
     }
     void display_market(std::vector<market>& market_vec) {
-        displayer::market_info(market_vec);
+        displayer_.print_market(market_vec);
     }
 private:
     md_crawler md_crawler_;
@@ -167,6 +165,7 @@ private:
     std::shared_ptr<configurator> config;
 private:
     code_db* db;
+    displayer displayer_;
 };
 
 }

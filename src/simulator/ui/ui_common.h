@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月11日 星期六 22时04分00秒
-*Last Modified: 2015年07月11日 星期六 22时34分08秒
+*Last Modified: 2015年07月13日 星期一 00时02分42秒
 *Purpose:
 **/
 #ifndef UI_COMMON_H
@@ -35,6 +35,12 @@ public:
         if (inc > 0.0) { return "+" + utility::to_string_pcs(100 * inc, 2) + "%"; }
         else if (inc < 0.0) { return utility::to_string_pcs(100 * inc, 2) + "%"; }
         else { return "0.00"; }
+    }
+    // wrapper of utility::to_string_pcs(...)
+    template <typename T>
+    static std::string to_string_pcs(const T& param, const size_t n = 0)
+    {
+        return utility::to_string_pcs(param, n);
     }
 };
 

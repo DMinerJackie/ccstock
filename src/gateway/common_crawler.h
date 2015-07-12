@@ -1,9 +1,10 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月06日 星期一 20时14分24秒
-*Last Modified: 2015年07月07日 星期二 23时11分00秒
+*Last Modified: 2015年07月13日 星期一 00时19分56秒
 *Purpose: 爬虫基类
 **/
+
 #ifndef COMMON_CRAWLER_H_
 #define COMMON_CRAWLER_H_
 
@@ -11,8 +12,8 @@
 
 #include <curl/curl.h>
 
-#include "common/logger.h"
-#include "common/common_defs.h"
+#include <common/logger.h>
+#include <common/common_defs.h>
 
 namespace gateway {
 
@@ -56,7 +57,7 @@ protected:
         str->append(ptr, len);
         return len;
     }
-protected:
+public:
     // 参数列表
     cc_vec_string code_vec;
 };

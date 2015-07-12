@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 00时13分41秒
-*Last Modified: 2015年07月06日 星期一 23时53分14秒
+*Last Modified: 2015年07月12日 星期日 22时32分10秒
 *Purpose:
 **/
 
@@ -9,6 +9,8 @@
 #define LOGGER_H_
 
 #include <iostream>
+#include <fstream>
+#include <vector>
 #include <string>
 
 using namespace std;
@@ -23,6 +25,16 @@ public:
     static void log_info(const T& info) { cout << info << endl; }
 
     template <typename T>
+    static void log_info_file(const vector<T>& vec)
+    {
+        ofstream ofs("log", ios::app);
+        for (auto elem : vec) {
+            ofs << elem << endl;
+        }
+        ofs.close();
+    }
+
+    template <typename T>
     static void log_debug_variadic(T& t)
     {
         cout << t << endl;
@@ -34,7 +46,7 @@ public:
         log_debug_variadic(args...);
     }
 
-    static void code_error(const string& code) { cerr << "股票代码[" << code << "]不存在，请检查！" << endl; }
+    static void code_error(const string& code) { cerr << "股票代码(简拼)[" << code << "]不存在，请检查！" << endl; }
 };
 
 }

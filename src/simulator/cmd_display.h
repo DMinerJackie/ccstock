@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 00时13分41秒
-*Last Modified: 2015年07月06日 星期一 23时54分03秒
+*Last Modified: 2015年07月13日 星期一 00时23分59秒
 *Purpose:
 **/
 
@@ -13,10 +13,10 @@
 #include <vector>
 #include <string>
 
-#include "common/io_aux.h"
-#include "common/common_defs.h"
-#include "instrument/stock.h"
-#include "common/utility.h"
+#include <common/io_aux.h>
+#include <common/common_defs.h>
+#include <common/utility.h>
+#include <instrument/stock.h>
 
 using namespace std;
 using namespace common;

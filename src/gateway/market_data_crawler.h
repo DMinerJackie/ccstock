@@ -1,9 +1,10 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月06日 星期一 19时56分34秒
-*Last Modified: 2015年07月09日 星期四 15时59分22秒
+*Last Modified: 2015年07月13日 星期一 00时20分40秒
 *Purpose:
 **/
+
 #ifndef MARKET_DATA_CRAWLER_H_
 #define MARKET_DATA_CRAWLER_H_
 
@@ -14,16 +15,18 @@
 #include <ev.h>
 #include <curl/curl.h>
 
-#include "common_crawler.h"
-#include "common/utility.h"
+#include <common/common_func.h>
+#include <common/utility.h>
+#include <common/logger.h>
+#include <simulator/instrument/stock.h>
 
 #include "sina_decoder.h"
-#include "simulator/instrument/stock.h"
+#include "common_crawler.h"
 
 namespace gateway {
 
 class market_data_crawler : public common_crawler {
-    using utility = common::utility;
+    using utility       = common::utility;
 private:
     struct ev_timer_wrapper {
         ev_timer timeout_watcher;
@@ -35,6 +38,7 @@ private:
         uint32_t top_num;
         std::string order;
         const cc_vec_string* code_vec;
+        std::string bk;
     };
 public:
     using self_type = market_data_crawler;
@@ -60,7 +64,7 @@ public:
         display_stock_cb = display_stock_cb_;
         timer_wrapper.crawler_ = this;
         timer_wrapper.all = all;
-        ev_timer_init(&timer_wrapper.timeout_watcher, stock_timeout_cb, 1.5, 1);
+        ev_timer_init(&timer_wrapper.timeout_watcher, stock_timeout_cb, 1.0, 1);
         ev_timer_start(ev_loop_, &timer_wrapper.timeout_watcher);
         return true;
     }
@@ -70,12 +74,12 @@ public:
         set_code_vec(code_vec);
         display_market_cb = display_market_cb_;
         timer_wrapper.crawler_ = this;
-        ev_timer_init(&timer_wrapper.timeout_watcher, market_timeout_cb, 1.5, 1);
+        ev_timer_init(&timer_wrapper.timeout_watcher, market_timeout_cb, 1.0, 1);
         ev_timer_start(ev_loop_, &timer_wrapper.timeout_watcher);
         return true;
     }
     // 查看板块信息
-    bool get_bk_data(const cc_vec_string& code_vec, uint32_t speed, int32_t top_num, std::string& order, 
+    bool get_bk_data(const string& bk, const cc_vec_string& code_vec, uint32_t speed, int32_t top_num, std::string& order, 
             display_stock_cb_t display_stock_cb_, 
             select_stock_cb_t select_stock_cb_)
     {
@@ -87,6 +91,7 @@ public:
         timer_wrapper_bk.top_num = top_num;
         timer_wrapper_bk.order = order;
         timer_wrapper_bk.code_vec = &code_vec;
+        timer_wrapper_bk.bk = bk;
 
         ev_timer_init(&timer_wrapper_bk.timeout_watcher, bk_timeout_cb, 1.0, 1);
         ev_timer_start(ev_loop_, &timer_wrapper_bk.timeout_watcher);
@@ -103,7 +108,7 @@ private:
                     crawler_,
                     std::placeholders::_1));
         decoder::decode(stock_data, stock_vec, wrapper->all);
-        crawler_->display_stock_cb(stock_vec); 
+        crawler_->display_stock_cb(stock_vec, "A股个股行情"); 
     }
     static void bk_timeout_cb(EV_P_ ev_timer *w, int)
     {
@@ -113,20 +118,26 @@ private:
         uint32_t idx = 0;
         std::vector<stock> stock_vec;
         string bk_data;
-        while (utility::get_vec_by_step(*(wrapper->code_vec), idx, speed, crawler_->code_vec)) {
+
+        cc_vec_string subvec;
+        while (utility::get_vec_by_step(*(wrapper->code_vec), idx, speed, subvec)) {
+            bk_data = "";
+            crawler_->set_code_vec(subvec);
             crawler_->crawler_content(bk_data, std::bind(&self_type::get_qry_str,
                     crawler_,
                     std::placeholders::_1));
             decoder::decode(bk_data, stock_vec, true);
         }
-        if (!crawler_->code_vec.empty()) {
+        if (!subvec.empty()) {
+            bk_data = "";
+            crawler_->set_code_vec(subvec);
             crawler_->crawler_content(bk_data, std::bind(&self_type::get_qry_str,
                     crawler_,
                     std::placeholders::_1));
-            decoder::decode(bk_data, stock_vec);
+            decoder::decode(bk_data, stock_vec, true);
         }
         crawler_->select_stock_cb(wrapper->top_num, wrapper->order, stock_vec);
-        crawler_->display_stock_cb(stock_vec);
+        crawler_->display_stock_cb(stock_vec, common::get_bk_name(wrapper->bk) + "个股行情");
     }
     static void market_timeout_cb(EV_P_ ev_timer *w, int)
     {

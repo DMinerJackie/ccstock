@@ -1,9 +1,10 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 00时13分41秒
-*Last Modified: 2015年07月09日 星期四 17时57分56秒
+*Last Modified: 2015年07月13日 星期一 00时19分50秒
 *Purpose:
 **/
+
 #ifndef CODE_CRAWLER_H_
 #define CODE_CRAWLER_H_
 
@@ -11,11 +12,10 @@
 #include <string>
 #include <vector>
 
+#include <common/utility.h>
+#include <common/common_defs.h>
+
 #include "sina_decoder.h"
-
-#include "common/utility.h"
-#include "common/common_defs.h"
-
 #include "common_crawler.h"
 
 namespace gateway {

@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月11日 星期六 17时16分48秒
-*Last Modified: 2015年07月12日 星期日 00时21分27秒
+*Last Modified: 2015年07月13日 星期一 00时15分19秒
 *Purpose:
 **/
 #ifndef TEXT_BASED_INTERFACE_H
@@ -13,13 +13,14 @@
 
 #include <cstdio>
 
+#include <ncurses.h>
+
 #include <common/common_defs.h>
 #include <simulator/instrument/stock.h>
 
 #include "systime.h"
 #include "ui_common.h"
 
-#include "ncurses.h"
 
 namespace simulator {
 namespace ui {
@@ -28,14 +29,61 @@ class text_based_interface {
 public:
     text_based_interface()
     {
+    }
+    ~text_based_interface()
+    {
+        endwin();
+    }
+    // 显示大盘行情
+    void print_market(const std::vector<market>& market_vec)
+    {
+        initialize();
+        print_header("大盘行情");
+        int row = 1, col = 0;
+        for (auto one : market_vec) {
+            int flag = one.inc_qty > 0 ? 1 : (one.inc_qty == 0 ? 0 : -1);
+            col = 0;
+            mvaddstr(row, col, one.name.c_str());
+            col += 15;
+            print_double_flag(row, col, one.index, flag);
+            col += 15;
+            print_double_flag(row, col, one.inc_qty, flag);
+            col += 15;
+            print_string_flag(row, col, (ui_common::to_string_pcs(one.inc_per, 2) + "%").c_str(), flag);
+            col += 15;
+            mvaddstr(row, col, ui_common::process_volumn_market(one.volumn).c_str());
+            col += 15;
+            mvaddstr(row, col, ui_common::process_to_market(one.turnover).c_str());
+            ++row;
+        }
+        refresh();
+    }
+    void print_stock(const std::vector<stock>& stock_vec, const char* header_name)
+    {
+        initialize();
+        print_header(header_name);
+        stock_info(stock_vec);
+    }
+    void print_options(const std::vector<stock>& stock_vec)
+    {
+        initialize();
+        print_header("自选股行情");
+        stock_info(stock_vec);
+    }
+private:
+    void initialize()
+    {
         setlocale(LC_ALL, "zh_CN.UTF-8"); // 支持中文
 
         initscr(); // start curses mode 
         win_handle = stdscr;
         getmaxyx(win_handle, row_, col_);        
     }
-
-    void stock_info_basic(const std::vector<stock>& stock_vec)
+    void print_header(const char* header_name)
+    {
+        mvprintw(0, 0, "%s    %s", header_name, systime::get_curr_time());
+    }
+    void stock_info(const std::vector<stock>& stock_vec)
     {
         std::vector<const char*> strvec = {common::CODE_CH,
             common::NAME_CH,
@@ -45,9 +93,10 @@ public:
             common::OPEN_P,
             common::CLOSE_P,
             common::HIGH_P,
-            common::LOW_P};        
-        int row = 0, col = 0;
-        mvprintw(row++, col, "%s    %s", "自选股行情", systime::get_curr_time());
+            common::LOW_P,
+            common::VOL,
+            common::TO};        
+        int row = 1, col = 0;
 
         attron(A_BOLD);
         for (auto str : strvec) {
@@ -77,37 +126,34 @@ public:
             col += 10;
             print_double(row, col, one.low_price, one.low_price - one.close_price);
             col += 10;
+            print_string(row, col, one.volumn, &ui_common::process_volumn, true);
+            col += 10;
+            print_string(row, col, one.turnover, &ui_common::process_to, true);
             ++row;
         }
         refresh();
     }
-    ~text_based_interface()
-    {
-        endwin();
-    }
-private:
-    void print_string(int row, int col, const double& val, process_double_t proc_double_func) const 
+    void print_string(int row, int col, const double& val, process_double_t proc_double_func, bool flag = false) const 
     {
         start_color();
         init_pair(1, COLOR_RED, COLOR_BLACK);
         init_pair(2, COLOR_GREEN, COLOR_BLACK);
         init_pair(3, COLOR_WHITE, COLOR_BLACK);
-        if (val > 0) {
-            attron(COLOR_PAIR(1));
-            mvaddstr(row, col, proc_double_func(val).c_str());
-            attroff(COLOR_PAIR(1)); 
-        }
-        else if (val < 0) 
-        {
-            attron(COLOR_PAIR(2));
-            mvaddstr(row, col, proc_double_func(val).c_str());
-            attroff(COLOR_PAIR(2)); 
-        } else
-        {
+        if (flag || (val > -0.001 && val < 0.001)) {
             attron(COLOR_PAIR(3));
             mvaddstr(row, col, proc_double_func(val).c_str());
             attroff(COLOR_PAIR(3)); 
         }
+        else if (val >= 0.001) {
+            attron(COLOR_PAIR(1));
+            mvaddstr(row, col, proc_double_func(val).c_str());
+            attroff(COLOR_PAIR(1)); 
+        }
+        else if (val <= -0.001) {
+            attron(COLOR_PAIR(2));
+            mvaddstr(row, col, proc_double_func(val).c_str());
+            attroff(COLOR_PAIR(2)); 
+        } 
     }
     void print_double(int row, int col, const double& val, double const& flag) const 
     {
@@ -115,20 +161,65 @@ private:
         init_pair(1, COLOR_RED, COLOR_BLACK);
         init_pair(2, COLOR_GREEN, COLOR_BLACK);
         init_pair(3, COLOR_WHITE, COLOR_BLACK);
-        if ((val > -0.01 && val < 0.01) || (flag > -0.01 && flag < 0.01)) {
+        if ((val > -0.001 && val < 0.001) || (flag > -0.001 && flag < 0.001)) {
             attron(COLOR_PAIR(3));
             mvprintw(row, col, "%.2lf", val);
             attroff(COLOR_PAIR(3)); 
         } 
-        else if (flag >= 0.01) {
-                attron(COLOR_PAIR(1));
-                mvprintw(row, col, "%.2lf", val);
-                attroff(COLOR_PAIR(1)); 
+        else if (flag >= 0.001) {
+            attron(COLOR_PAIR(1));
+            mvprintw(row, col, "%.2lf", val);
+            attroff(COLOR_PAIR(1)); 
         }
-        else if (flag <= -0.01) {
-                attron(COLOR_PAIR(2));
-                mvprintw(row, col, "%.2lf", val);
-                attroff(COLOR_PAIR(2)); 
+        else if (flag <= -0.001) {
+            attron(COLOR_PAIR(2));
+            mvprintw(row, col, "%.2lf", val);
+            attroff(COLOR_PAIR(2)); 
+        } 
+    }
+    
+    void print_double_flag(int row, int col, const double& val, int flag) const 
+    {
+        start_color();
+        init_pair(1, COLOR_RED, COLOR_BLACK);
+        init_pair(2, COLOR_GREEN, COLOR_BLACK);
+        init_pair(3, COLOR_WHITE, COLOR_BLACK);
+        if (flag == 0) {
+            attron(COLOR_PAIR(3));
+            mvprintw(row, col, "%.2lf", val);
+            attroff(COLOR_PAIR(3)); 
+        } 
+        else if (flag  == 1) {
+            attron(COLOR_PAIR(1));
+            mvprintw(row, col, "%.2lf", val);
+            attroff(COLOR_PAIR(1)); 
+        }
+        else if (flag <= -0.001) {
+            attron(COLOR_PAIR(2));
+            mvprintw(row, col, "%.2lf", val);
+            attroff(COLOR_PAIR(2)); 
+        } 
+    }
+    void print_string_flag(int row, int col, const std::string& val, int flag) const 
+    {
+        start_color();
+        init_pair(1, COLOR_RED, COLOR_BLACK);
+        init_pair(2, COLOR_GREEN, COLOR_BLACK);
+        init_pair(3, COLOR_WHITE, COLOR_BLACK);
+        if (flag == 0) {
+            attron(COLOR_PAIR(3));
+            mvaddstr(row, col, val.c_str());
+            attroff(COLOR_PAIR(3)); 
+        } 
+        else if (flag  == 1) {
+            attron(COLOR_PAIR(1));
+            mvaddstr(row, col, val.c_str());
+            attroff(COLOR_PAIR(1)); 
+        }
+        else if (flag <= -0.001) {
+            attron(COLOR_PAIR(2));
+            mvaddstr(row, col, val.c_str());
+            attroff(COLOR_PAIR(2)); 
         } 
     }
 private:

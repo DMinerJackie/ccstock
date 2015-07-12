@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月04日 星期六 23时57分03秒
-*Last Modified: 2015年07月11日 星期六 20时27分36秒
+*Last Modified: 2015年07月13日 星期一 00时26分31秒
 *Purpose: 自选股管理器
 **/
 
@@ -11,8 +11,8 @@
 #include <string>
 #include <memory>
 
-#include "common/common_defs.h"
-#include "common/utility.h"
+#include <common/common_defs.h>
+#include <common/utility.h>
 
 #include "file_handler.h"
 
@@ -32,13 +32,17 @@ public:
     {
         cc_vec_string code_vec;
         utility::split(options, ',', code_vec);
-        file_handler::add_option(code_vec, option_path);
+        if (db->from_jp_to_code(code_vec)) {
+            file_handler::add_option(code_vec, option_path);
+        }
     }
     void del_option(const std::string& options)
     {
         cc_vec_string code_vec;
         utility::split(options, ',', code_vec);
-        file_handler::del_option(code_vec, option_path);
+        if (db->from_jp_to_code(code_vec)) {
+            file_handler::del_option(code_vec, option_path);
+        }
     }
     void show_option()
     {
@@ -55,7 +59,7 @@ public:
 private:
     void display_options(const std::vector<stock>& stock_vec)
     {
-        displayer_.stock_info_basic(stock_vec);
+        displayer_.print_options(stock_vec);
     }
 private:
     std::string option_path;

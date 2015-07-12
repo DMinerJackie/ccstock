@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 00时13分41秒
-*Last Modified: 2015年07月11日 星期六 23时46分06秒
+*Last Modified: 2015年07月13日 星期一 00时21分32秒
 *Purpose:
 **/
 
@@ -14,11 +14,11 @@
 #include <utility>
 #include <stddef.h> // size_t
 
-#include "simulator/instrument/stock.h"
-#include "common/encoding.h"
-#include "common/utility.h"
-#include "common/logger.h"
-#include "common/common_defs.h"
+#include <simulator/instrument/stock.h>
+#include <common/encoding.h>
+#include <common/utility.h>
+#include <common/logger.h>
+#include <common/common_defs.h>
 
 namespace gateway {
 
@@ -129,7 +129,7 @@ private:
 
         stock_.date = field[30];
         stock_.time = field[31];
-        
+
         if (stock_.open_price != 0.0) {
             stock_.inc_v    =  stock_.curr_price - stock_.close_price;
             stock_.inc      =  stock_.inc_v / stock_.close_price;

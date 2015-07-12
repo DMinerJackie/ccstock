@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 00时13分41秒
-*Last Modified: 2015年07月06日 星期一 23时52分56秒
+*Last Modified: 2015年07月13日 星期一 00时17分11秒
 *Purpose:
 **/
 
@@ -13,8 +13,6 @@
 #include <cstdlib>
 
 #include <iconv.h>
-
-#include <iostream>
 
 namespace common {
 

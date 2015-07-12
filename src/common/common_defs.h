@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 00时13分41秒
-*Last Modified: 2015年07月11日 星期六 21时36分30秒
+*Last Modified: 2015年07月12日 星期日 18时21分42秒
 *Purpose:
 **/
 
@@ -29,6 +29,12 @@ const char* TO          = "成交额";
 
 const char* INC         = "涨幅";
 const char* INC_V       = "涨跌";
+
+const std::string all = "A股";
+const std::string cyb = "创业板";
+const std::string zxb = "中小板";
+const std::string sz  = "深市";
+const std::string sh  = "沪市";
 
 }
 
