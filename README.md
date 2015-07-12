@@ -1,4 +1,4 @@
-##Linux(Ubuntu)平台下的A股神器
+##Linux平台下的A股神器
 
 ###依赖列表
 使用C++(11)开发,第三方库如下:
@@ -19,11 +19,12 @@
 ###使用指南
 **数据位置**
 
+    build/bin/data/code
+
 自选股/大盘所有股票存放(可在配置文件中更改)
 
 **命令大全**
 
-    build/bin/data/code
     -h [ --help ]         显示帮助信息
     -a [ --code ] arg     查看个股信息，代码用','分开
     -c [ --config ] arg   设置配置XML配置文件(示例:build/bin/ccstock.xml)
