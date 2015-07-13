@@ -1,0 +1,15 @@
+INCLUDE_DIRECTORIES(/usr/include) 
+INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
+
+SET( CMAKE_BUILD_TYPE Debug )
+
+ADD_DEFINITIONS (
+    -std=c++11
+)
+
+ADD_EXECUTABLE(test test_main.cpp)
+
+TARGET_LINK_LIBRARIES(test
+    ev
+    ncurses
+)

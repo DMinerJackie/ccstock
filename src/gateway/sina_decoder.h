@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 00时13分41秒
-*Last Modified: 2015年07月13日 星期一 00时21分32秒
+*Last Modified: 2015年07月13日 星期一 21时56分42秒
 *Purpose:
 **/
 
@@ -39,9 +39,8 @@ public:
         utility::split(code_data, ';', code_data_vec, true);
         for (auto data : code_data_vec) {
             std::string info;
-            utility::subsplit(data, '"', info);
-            if (info != "") {
-                final_code.push_back(data.substr(15, 6));
+            if (utility::subsplit(data, '"', info)) {
+                final_code.push_back(data.substr(13, 6));
             }
         }
     }
@@ -82,9 +81,7 @@ private:
         stock_.code = data.substr(13, 6);
 
         std::string md;
-        utility::subsplit(data, '"', md);
-
-        if (md == "") {
+        if (!utility::subsplit(data, '"', md)) {
             logger::code_error(stock_.code);
             return false;
         }

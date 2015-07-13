@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 00时13分41秒
-*Last Modified: 2015年07月13日 星期一 00时19分50秒
+*Last Modified: 2015年07月13日 星期一 21时24分22秒
 *Purpose:
 **/
 
@@ -66,9 +66,9 @@ private:
             if (first)  { qry_str += ','; }
             else { first = true; }
             if (code[0] == '0' || code[0] == '3') {
-                qry_str += "s_sz" + code;
+                qry_str += "sz" + code;
             } else if (code[0] == '6') {
-                qry_str += "s_sh" + code;
+                qry_str += "sh" + code;
             } else {
                 logger::code_error(code);
                 return false;
