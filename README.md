@@ -47,8 +47,6 @@
     --del-option arg      删除自选股,股票代码用','分开
     -O [ --show-option ]  查看自选股
 
-**Demo**
-
 查看创业板(cyb)现价前20的股票
 
     ./ccstock -c ccstock.xml -d cyb -t 20 -o xj
