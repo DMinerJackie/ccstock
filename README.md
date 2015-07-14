@@ -1,7 +1,7 @@
 ##Linux平台下的A股神器
 
 ###Demo
-![ccstock.gif](demo/ccstock.gif)
+![ccstock.gif](demo/demo.gif)
 
 ###依赖列表
 使用C++(11)开发,第三方库如下:
