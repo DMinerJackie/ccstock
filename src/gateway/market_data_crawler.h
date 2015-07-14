@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月06日 星期一 19时56分34秒
-*Last Modified: 2015年07月13日 星期一 00时20分40秒
+*Last Modified: 2015年07月14日 星期二 09时40分12秒
 *Purpose:
 **/
 
@@ -64,7 +64,7 @@ public:
         display_stock_cb = display_stock_cb_;
         timer_wrapper.crawler_ = this;
         timer_wrapper.all = all;
-        ev_timer_init(&timer_wrapper.timeout_watcher, stock_timeout_cb, 1.0, 1);
+        ev_timer_init(&timer_wrapper.timeout_watcher, stock_timeout_cb, 0.5, 1);
         ev_timer_start(ev_loop_, &timer_wrapper.timeout_watcher);
         return true;
     }
