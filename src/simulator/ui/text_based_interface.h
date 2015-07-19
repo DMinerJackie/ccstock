@@ -75,9 +75,9 @@ private:
     {
         setlocale(LC_ALL, "zh_CN.UTF-8"); // 支持中文
 
-        initscr(); // start curses mode 
+        initscr(); // start curses mode
         win_handle = stdscr;
-        getmaxyx(win_handle, row_, col_);        
+        getmaxyx(win_handle, row_, col_);
     }
     void print_header(const char* header_name)
     {
@@ -95,13 +95,13 @@ private:
             common::HIGH_P,
             common::LOW_P,
             common::VOL,
-            common::TO};        
+            common::TO};
         int row = 1, col = 0;
 
         attron(A_BOLD);
         for (auto str : strvec) {
             mvaddstr(row, col, str);
-            col += 10; 
+            col += 10;
         }
         attroff(A_BOLD);
 
@@ -133,7 +133,7 @@ private:
         }
         refresh();
     }
-    void print_string(int row, int col, const double& val, process_double_t proc_double_func, bool flag = false) const 
+    void print_string(int row, int col, const double& val, process_double_t proc_double_func, bool flag = false) const
     {
         start_color();
         init_pair(1, COLOR_RED, COLOR_BLACK);
@@ -142,20 +142,20 @@ private:
         if (flag || (val > -0.001 && val < 0.001)) {
             attron(COLOR_PAIR(3));
             mvaddstr(row, col, proc_double_func(val).c_str());
-            attroff(COLOR_PAIR(3)); 
+            attroff(COLOR_PAIR(3));
         }
         else if (val >= 0.001) {
             attron(COLOR_PAIR(1));
             mvaddstr(row, col, proc_double_func(val).c_str());
-            attroff(COLOR_PAIR(1)); 
+            attroff(COLOR_PAIR(1));
         }
         else if (val <= -0.001) {
             attron(COLOR_PAIR(2));
             mvaddstr(row, col, proc_double_func(val).c_str());
-            attroff(COLOR_PAIR(2)); 
-        } 
+            attroff(COLOR_PAIR(2));
+        }
     }
-    void print_double(int row, int col, const double& val, double const& flag) const 
+    void print_double(int row, int col, const double& val, double const& flag) const
     {
         start_color();
         init_pair(1, COLOR_RED, COLOR_BLACK);
@@ -164,21 +164,21 @@ private:
         if ((val > -0.001 && val < 0.001) || (flag > -0.001 && flag < 0.001)) {
             attron(COLOR_PAIR(3));
             mvprintw(row, col, "%.2lf", val);
-            attroff(COLOR_PAIR(3)); 
-        } 
+            attroff(COLOR_PAIR(3));
+        }
         else if (flag >= 0.001) {
             attron(COLOR_PAIR(1));
             mvprintw(row, col, "%.2lf", val);
-            attroff(COLOR_PAIR(1)); 
+            attroff(COLOR_PAIR(1));
         }
         else if (flag <= -0.001) {
             attron(COLOR_PAIR(2));
             mvprintw(row, col, "%.2lf", val);
-            attroff(COLOR_PAIR(2)); 
-        } 
+            attroff(COLOR_PAIR(2));
+        }
     }
-    
-    void print_double_flag(int row, int col, const double& val, int flag) const 
+
+    void print_double_flag(int row, int col, const double& val, int flag) const
     {
         start_color();
         init_pair(1, COLOR_RED, COLOR_BLACK);
@@ -187,20 +187,20 @@ private:
         if (flag == 0) {
             attron(COLOR_PAIR(3));
             mvprintw(row, col, "%.2lf", val);
-            attroff(COLOR_PAIR(3)); 
-        } 
+            attroff(COLOR_PAIR(3));
+        }
         else if (flag  == 1) {
             attron(COLOR_PAIR(1));
             mvprintw(row, col, "%.2lf", val);
-            attroff(COLOR_PAIR(1)); 
+            attroff(COLOR_PAIR(1));
         }
         else if (flag <= -0.001) {
             attron(COLOR_PAIR(2));
             mvprintw(row, col, "%.2lf", val);
-            attroff(COLOR_PAIR(2)); 
-        } 
+            attroff(COLOR_PAIR(2));
+        }
     }
-    void print_string_flag(int row, int col, const std::string& val, int flag) const 
+    void print_string_flag(int row, int col, const std::string& val, int flag) const
     {
         start_color();
         init_pair(1, COLOR_RED, COLOR_BLACK);
@@ -209,18 +209,18 @@ private:
         if (flag == 0) {
             attron(COLOR_PAIR(3));
             mvaddstr(row, col, val.c_str());
-            attroff(COLOR_PAIR(3)); 
-        } 
+            attroff(COLOR_PAIR(3));
+        }
         else if (flag  == 1) {
             attron(COLOR_PAIR(1));
             mvaddstr(row, col, val.c_str());
-            attroff(COLOR_PAIR(1)); 
+            attroff(COLOR_PAIR(1));
         }
         else if (flag <= -0.001) {
             attron(COLOR_PAIR(2));
             mvaddstr(row, col, val.c_str());
-            attroff(COLOR_PAIR(2)); 
-        } 
+            attroff(COLOR_PAIR(2));
+        }
     }
 private:
     int row_, col_;

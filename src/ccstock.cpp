@@ -13,7 +13,7 @@
 
 class stock_service {
 public:
-    stock_service(shared_ptr<configurator> config_): 
+    stock_service(shared_ptr<configurator> config_):
         md_client_(config_),
         code_initializer_(config_),
         db(new code_db)
@@ -27,10 +27,10 @@ public:
         // 初始化行情客户端
         md_client_.initialize();
         //自选股管理器
-        option_manager_.configure(db, 
+        option_manager_.configure(db,
                 config_->get_value("stock.market_data.code.option_path", std::string()));
         // 历史数据客户端
-        history_client_.configure(code_path, 
+        history_client_.configure(code_path,
                 config_->get_value("stock.market_data.code.history_path", std::string()));
     }
     // 显示个股行情
@@ -102,7 +102,7 @@ int main(int argc, char* argv[]) {
 
     stock_service service(configurator_);
     if (configurator_->is_option_set("code")) {
-        service.show_stock_data(configurator_->get_string_option("code"));        
+        service.show_stock_data(configurator_->get_string_option("code"));
     }
     if (configurator_->is_option_set("market")) {
         service.show_market();

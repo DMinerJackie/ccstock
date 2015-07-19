@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月06日 星期一 20时14分24秒
-*Last Modified: 2015年07月19日 星期日 16时39分11秒
+*Last Modified: 2015年07月20日 星期一 00时01分01秒
 *Purpose: 爬虫基类
 **/
 
@@ -22,13 +22,13 @@ class common_crawler {
 protected:
     using logger = common::logger;
 public:
-    common_crawler() 
+    common_crawler()
     {
         curl = curl_easy_init();
     }
     ~common_crawler() {
         curl_easy_cleanup(curl);
-    }    
+    }
     // 获取数据
     bool crawler_content(std::string& user_data, gen_qry_str_func qry_str_func) {
         if (!qry_str_func()) { return false; }
@@ -43,7 +43,7 @@ public:
         return false;
     }
     // 下载文件
-    bool download(const char *out_file_name, gen_qry_str_func qry_str_func) 
+    bool download(const char *out_file_name, gen_qry_str_func qry_str_func)
     {
         if (!qry_str_func()) { return false; }
         if (curl) {

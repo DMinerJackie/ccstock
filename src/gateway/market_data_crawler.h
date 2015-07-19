@@ -48,7 +48,7 @@ public:
     using market    = simulator::market;
     using logger    = common::logger;
 public:
-    market_data_crawler() 
+    market_data_crawler()
     {
         ev_loop_ = EV_DEFAULT;
     }
@@ -79,8 +79,8 @@ public:
         return true;
     }
     // 查看板块信息
-    bool get_bk_data(const string& bk, const cc_vec_string& code_vec, uint32_t speed, int32_t top_num, std::string& order, 
-            display_stock_cb_t display_stock_cb_, 
+    bool get_bk_data(const string& bk, const cc_vec_string& code_vec, uint32_t speed, int32_t top_num, std::string& order,
+            display_stock_cb_t display_stock_cb_,
             select_stock_cb_t select_stock_cb_)
     {
         set_code_vec(code_vec);
@@ -107,7 +107,7 @@ private:
         crawler_->crawler_content(stock_data, std::bind(&self_type::get_qry_str,
                     crawler_));
         decoder::decode(stock_data, stock_vec, wrapper->all);
-        crawler_->display_stock_cb(stock_vec, "A股个股行情"); 
+        crawler_->display_stock_cb(stock_vec, "A股个股行情");
     }
     static void bk_timeout_cb(EV_P_ ev_timer *w, int)
     {
@@ -145,12 +145,12 @@ private:
         crawler_->crawler_content(market_data, std::bind(&self_type::get_plain_qry_str,
                     crawler_));
         decoder::decode_market(market_data, market_vec);
-        crawler_->display_market_cb(market_vec); 
+        crawler_->display_market_cb(market_vec);
     }
 private:
     // 获取URL列表-未加上sh/sz前缀
     bool get_qry_str() {
-        qry_str += "http://hq.sinajs.cn/list=";
+        qry_str = "http://hq.sinajs.cn/list=";
         bool first = false;
         for (auto code : code_vec) {
             if (code.length() != 6) {
@@ -173,7 +173,7 @@ private:
     // 获取URL列表-已加上sh/sz前缀
     bool get_plain_qry_str()
     {
-        qry_str += "http://hq.sinajs.cn/list=";
+        qry_str = "http://hq.sinajs.cn/list=";
         for (auto code : code_vec) {
             qry_str += code + ",";
         }
@@ -186,7 +186,7 @@ private:
     struct ev_loop *ev_loop_;
     ev_timer_wrapper timer_wrapper;
     ev_timer_wrapper_bk timer_wrapper_bk;
-    
+
     display_stock_cb_t display_stock_cb;
     display_market_cb_t display_market_cb;
     select_stock_cb_t select_stock_cb;

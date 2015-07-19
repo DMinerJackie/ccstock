@@ -1,5 +1,5 @@
-/** 
-*Author: Steve Zhong 
+/**
+*Author: Steve Zhong
 *Creation Date: 2015年07月19日 星期日 16时06分06秒
 *Last Modified: 2015年07月19日 星期日 16时49分10秒
 *Purpose:
@@ -33,7 +33,7 @@ public:
     {
         code_path = code_path_;
         data_path = data_path_;
-        common::io_aux::create_folder(data_path.c_str()); 
+        common::io_aux::create_folder(data_path.c_str());
     }
     void get_history_all()
     {

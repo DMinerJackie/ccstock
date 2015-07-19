@@ -34,7 +34,7 @@ public:
             if ((i != 0 && i % 100 == 0) || i == code_vec.size() - 1) {
                 logger::log_info("成功获取" + std::to_string(i + 1) + "个股票历史交易数据!");
             }
-            set_code_vec({code_vec[i]});            
+            set_code_vec({code_vec[i]});
             download(file_name_vec[i].c_str(), std::bind(&self_type::get_qry_str,
                 this));
         }
@@ -44,13 +44,13 @@ private:
     // 获取URL
     bool get_qry_str()
     {
-        qry_str = "http://ichart.yahoo.com/table.csv?s=" + code_vec[0];        
+        qry_str = "http://ichart.yahoo.com/table.csv?s=" + code_vec[0];
         if (common::get_stock_type(code_vec[0]) == common::stock_type::SH) {
             qry_str += ".SS";
         }
         else {
             qry_str += ".SZ";
-        }        
+        }
         return true;
     }
 private:

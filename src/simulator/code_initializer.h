@@ -41,9 +41,11 @@ public:
     }
     void manual_initialize()
     {
-        logger::log_info("系统首次运行初始化...");
-        gen_code();
-        gen_code_jp_name();
+        if (count++ == 0) {
+            logger::log_info("系统首次运行初始化...");
+            gen_code();
+            gen_code_jp_name();
+        }
     }
 
 private:
@@ -93,7 +95,7 @@ private:
         crawler_.gen_code_jp_name(code_vec, code_jp_name_vec);
         file_handler::save_code_jp_name(code_jp_name_vec, code_path);
     }
-private: 
+private:
     void gen_code_bk(cc_vec_string& final_code, cc_vec_string& init_code, const std::string& bk)
     {
         uint32_t idx = 0;
@@ -136,7 +138,12 @@ private:
     crawler crawler_;
     std::string code_path; // 股票代码文件存放
     std::shared_ptr<configurator> config;
+private:
+    static int count;
 };
+
+template <typename crawler>
+int code_initializer<crawler>::count = 0;
 
 }
 #endif

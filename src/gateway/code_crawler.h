@@ -54,7 +54,7 @@ public:
     }
 private:
     inline bool get_qry_str() {
-        qry_str += "http://hq.sinajs.cn/list=";
+        qry_str = "http://hq.sinajs.cn/list=";
         bool first = false;
         for (auto code : code_vec) {
             if (code.length() != 6) {

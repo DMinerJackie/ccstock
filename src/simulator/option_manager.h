@@ -54,7 +54,7 @@ public:
                     this,
                     std::placeholders::_1),
                 true);
-        crawler_.run(); 
+        crawler_.run();
     }
 private:
     void display_options(const std::vector<stock>& stock_vec)
