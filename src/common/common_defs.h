@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 00时13分41秒
-*Last Modified: 2015年07月12日 星期日 18时21分42秒
+*Last Modified: 2015年07月19日 星期日 15时54分58秒
 *Purpose:
 **/
 
@@ -36,9 +36,11 @@ const std::string zxb = "中小板";
 const std::string sz  = "深市";
 const std::string sh  = "沪市";
 
+enum class stock_type { SH, SZ };
+
 }
 
-using gen_qry_str_func = std::function<bool(std::string&)>;
+using gen_qry_str_func = std::function<bool()>;
 
 using get_code_func = std::function<void()>;
 using gen_code_map  = std::unordered_map<std::string, get_code_func>;

@@ -46,6 +46,7 @@
     --add-option arg      追加自选股,股票代码用','分开
     --del-option arg      删除自选股,股票代码用','分开
     -O [ --show-option ]  查看自选股
+    -H                    获取历史数据
 
 查看创业板(cyb)现价前20的股票
 

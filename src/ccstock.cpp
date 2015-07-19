@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 00时13分41秒
-*Last Modified: 2015年07月10日 星期五 23时21分33秒
+*Last Modified: 2015年07月19日 星期日 19时49分32秒
 *Purpose:
 **/
 
@@ -29,6 +29,9 @@ public:
         //自选股管理器
         option_manager_.configure(db, 
                 config_->get_value("stock.market_data.code.option_path", std::string()));
+        // 历史数据客户端
+        history_client_.configure(code_path, 
+                config_->get_value("stock.market_data.code.history_path", std::string()));
     }
     // 显示个股行情
     void show_stock_data(const std::string& code)
@@ -56,10 +59,21 @@ public:
     {
         option_manager_.show_option();
     }
+    // 获取历史数据
+    void get_history_data()
+    {
+        history_client_.get_history_all();
+    }
+    // 手动初始化股票代码
+    void code_initialize()
+    {
+        code_initializer_.manual_initialize();
+    }
 private:
     md_client_t md_client_;
     code_initializer_t code_initializer_;
     option_manager_t option_manager_;
+    history_client_t history_client_;
     // 股票代码数据
     shared_ptr<code_db> db;
 private:
@@ -77,6 +91,8 @@ int main(int argc, char* argv[]) {
     configurator_->add_option("add-option", "追加自选股,股票代码用','分开", std::string());
     configurator_->add_option("del-option", "删除自选股,股票代码用','分开", std::string());
     configurator_->add_plain_option("show-option,O", "查看自选股");
+    configurator_->add_plain_option("history,H", "获取历史数据");
+    configurator_->add_plain_option("init", "初始化股票代码");
     configurator_->parse_command_line(argc, argv);
 
     if (configurator_->is_option_set("help")) {
@@ -99,6 +115,12 @@ int main(int argc, char* argv[]) {
     }
     if (configurator_->is_option_set("show-option")) {
         service.show_option();
+    }
+    if (configurator_->is_option_set("history")) {
+        service.get_history_data();
+    }
+    if (configurator_->is_option_set("init")) {
+        service.code_initialize();
     }
     if (configurator_->is_option_set("data")) {
         int32_t top_num = -1;

@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月06日 星期一 19时56分34秒
-*Last Modified: 2015年07月14日 星期二 09时40分12秒
+*Last Modified: 2015年07月19日 星期日 15时39分04秒
 *Purpose:
 **/
 
@@ -105,8 +105,7 @@ private:
         string stock_data;
         std::vector<stock> stock_vec;
         crawler_->crawler_content(stock_data, std::bind(&self_type::get_qry_str,
-                    crawler_,
-                    std::placeholders::_1));
+                    crawler_));
         decoder::decode(stock_data, stock_vec, wrapper->all);
         crawler_->display_stock_cb(stock_vec, "A股个股行情"); 
     }
@@ -124,16 +123,14 @@ private:
             bk_data = "";
             crawler_->set_code_vec(subvec);
             crawler_->crawler_content(bk_data, std::bind(&self_type::get_qry_str,
-                    crawler_,
-                    std::placeholders::_1));
+                    crawler_));
             decoder::decode(bk_data, stock_vec, true);
         }
         if (!subvec.empty()) {
             bk_data = "";
             crawler_->set_code_vec(subvec);
             crawler_->crawler_content(bk_data, std::bind(&self_type::get_qry_str,
-                    crawler_,
-                    std::placeholders::_1));
+                    crawler_));
             decoder::decode(bk_data, stock_vec, true);
         }
         crawler_->select_stock_cb(wrapper->top_num, wrapper->order, stock_vec);
@@ -146,14 +143,13 @@ private:
         string market_data;
         std::vector<market> market_vec;
         crawler_->crawler_content(market_data, std::bind(&self_type::get_plain_qry_str,
-                    crawler_,
-                    std::placeholders::_1));
+                    crawler_));
         decoder::decode_market(market_data, market_vec);
         crawler_->display_market_cb(market_vec); 
     }
 private:
     // 获取URL列表-未加上sh/sz前缀
-    bool get_qry_str(string& qry_str) {
+    bool get_qry_str() {
         qry_str += "http://hq.sinajs.cn/list=";
         bool first = false;
         for (auto code : code_vec) {
@@ -175,7 +171,7 @@ private:
         return true;
     }
     // 获取URL列表-已加上sh/sz前缀
-    bool get_plain_qry_str(string& qry_str)
+    bool get_plain_qry_str()
     {
         qry_str += "http://hq.sinajs.cn/list=";
         for (auto code : code_vec) {

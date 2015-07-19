@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 00时13分41秒
-*Last Modified: 2015年07月13日 星期一 21时24分22秒
+*Last Modified: 2015年07月19日 星期日 15时38分04秒
 *Purpose:
 **/
 
@@ -32,8 +32,7 @@ public:
         set_code_vec(init_code);
         std::string code_data;
         crawler_content(code_data, std::bind(&self_type::get_qry_str,
-                this,
-                std::placeholders::_1));
+                this));
         decoder::decode_code(code_data, final_code);
         return true;
     }
@@ -44,8 +43,7 @@ public:
         std::string code_jp_name_data;
         for (auto code : code_vec) {
             crawler_content(code_jp_name_data, std::bind(&self_type::get_code_jp_name_qry_str,
-                    this,
-                    std::placeholders::_1));
+                    this));
             decoder::decode_code_jp_name(code_jp_name_data, code_jp_name_vec);
             if (++code_jp_name_idx % 200 == 0) {
                 logger::log_debug_variadic("获取股票简拼数量(比较慢): ", code_jp_name_idx);
@@ -55,7 +53,7 @@ public:
         return true;
     }
 private:
-    inline bool get_qry_str(string& qry_str) {
+    inline bool get_qry_str() {
         qry_str += "http://hq.sinajs.cn/list=";
         bool first = false;
         for (auto code : code_vec) {
@@ -76,7 +74,7 @@ private:
         }
         return true;
     }
-    inline bool get_code_jp_name_qry_str(std::string& qry_str)
+    inline bool get_code_jp_name_qry_str()
     {
         qry_str = "http://suggest3.sinajs.cn/suggest/type=11&key=";
         std::string code = code_vec[code_jp_name_idx];

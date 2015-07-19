@@ -12,4 +12,5 @@ ADD_EXECUTABLE(test test_main.cpp)
 TARGET_LINK_LIBRARIES(test
     ev
     ncurses
+    curl
 )
