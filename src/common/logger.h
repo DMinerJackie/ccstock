@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 00时13分41秒
-*Last Modified: 2015年07月12日 星期日 22时32分10秒
+*Last Modified: 2015年07月23日 星期四 22时42分43秒
 *Purpose:
 **/
 
@@ -23,6 +23,9 @@ public:
     static void log_debug(const string& debug_info) { cout << debug_info << endl; }
     template <typename T>
     static void log_info(const T& info) { cout << info << endl; }
+    // 不加换行
+    template <typename T>
+    static void log_info_inline(const T& info) { cout << info << flush; }
 
     template <typename T>
     static void log_info_file(const vector<T>& vec)

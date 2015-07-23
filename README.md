@@ -10,6 +10,7 @@
 2. libcurl
 3. libev
 4. ncurses(w)
+5. LevelDB
 
 ###编译
 `build/bin/`下有编译好的程序,手动编译如下:

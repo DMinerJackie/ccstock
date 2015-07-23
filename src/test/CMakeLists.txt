@@ -13,4 +13,5 @@ TARGET_LINK_LIBRARIES(test
     ev
     ncurses
     curl
+    leveldb
 )

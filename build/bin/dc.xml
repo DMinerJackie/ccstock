@@ -1,0 +1,18 @@
+<data>
+    <!-- 历史数据 -->
+    <history>
+        <!-- 雅虎历史数据 -->
+        <yahoo>300</yahoo>
+    </history>
+    <!-- 数据存放地址 -->
+    <locate>
+        <!-- 文件数据存放地址 -->
+        <file>
+            <yahoo>bin/data/history/yahoo/</yahoo>
+        </file>
+        <!-- 数据存放地址 -->
+        <db>
+            <yahoo>/tmp/db/yahoo/</yahoo>
+        </db>
+    </locate>
+</stock>

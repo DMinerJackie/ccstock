@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月12日 星期日 18时05分07秒
-*Last Modified: 2015年07月19日 星期日 15时57分39秒
+*Last Modified: 2015年07月24日 星期五 00时33分32秒
 *Purpose:
 **/
 
@@ -16,7 +16,7 @@
 namespace common {
 
 // 获取板块名称
-const string get_bk_name(const std::string& bk)
+static const string get_bk_name(const std::string& bk)
 {
     if (bk == "all") return all;
     else if (bk == "cyb") return cyb;
@@ -30,7 +30,7 @@ const string get_bk_name(const std::string& bk)
 }
 
 // 判断是沪市还是深市股票
-stock_type get_stock_type(const std::string& code) {
+static stock_type get_stock_type(const std::string& code) {
     return (code[0] == '6' ? stock_type::SH : stock_type::SZ);
 }
 

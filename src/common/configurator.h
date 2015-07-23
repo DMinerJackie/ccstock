@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月23日 星期二 22时30分03秒
-*Last Modified: 2015年07月06日 星期一 23时52分50秒
+*Last Modified: 2015年07月23日 星期四 22时10分50秒
 *Purpose:
 **/
 
@@ -76,6 +76,10 @@ public:
             pt::read_xml(get_string_option("config"), tree, pt::xml_parser::no_comments);
         }
         return true;
+    }
+    bool parse_xml_file(const string& xml_file_name)
+    {
+        pt::read_xml(xml_file_name, tree, pt::xml_parser::no_comments);
     }
     void show_options()
     {
