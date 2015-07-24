@@ -16,4 +16,11 @@
             <yahoo>/tmp/db/yahoo/</yahoo>
         </db>
     </locate>
-</stock>
+    <!-- api接口 -->
+    <api>
+        <!-- 历史数据api -->
+        <history>
+            <yahoo>http://ichart.yahoo.com/table.csv?s=</yahoo>
+        </history>
+    </api>
+</data>
