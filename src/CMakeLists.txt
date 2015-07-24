@@ -1,14 +1,4 @@
-INCLUDE_DIRECTORIES(/usr/include) 
-INCLUDE_DIRECTORIES(/usr/include/curl) 
-INCLUDE_DIRECTORIES(/usr/include/boost) 
-INCLUDE_DIRECTORIES(${CMAKE_CURRENT_SOURCE_DIR})
-
-SET( CMAKE_BUILD_TYPE Debug )
-
-ADD_DEFINITIONS (
-    -static
-    -std=c++11
-)
+INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} )
 
 ADD_EXECUTABLE(ccstock ccstock.cpp)
 
@@ -19,3 +9,5 @@ TARGET_LINK_LIBRARIES(ccstock
     boost_system
     boost_filesystem
     boost_program_options)
+
+SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-unused-variable -Wno-unused-function -O2 -std=c++11" )

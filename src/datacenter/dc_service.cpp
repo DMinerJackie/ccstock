@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月23日 星期四 23时08分02秒
-*Last Modified: 2015年07月24日 星期五 21时42分08秒
+*Last Modified: 2015年07月25日 星期六 00时17分01秒
 *Purpose:
 **/
 
@@ -35,10 +35,18 @@ void dc_service::read_cb(EV_P_ ev_io *w, int revents)
     dc_io_data* io_data = (dc_io_data*) w;
     std::string command;
     std::cin >> command;
-    // 判断输入的命令
-    if (command == "history" || command == "H")
-    {
+    // 获取历史数据
+    if (command == "history" || command == "H") {
         io_data->history_client->get_history_all();
+    }
+    // 退出
+    else if (command == "quit" || command == "q") {
+        ev_break(EV_A_ EVBREAK_ALL); 
+        return;
+    }
+    // 未知的命令
+    else {
+        logger::cmd_error(command);
     }
     logger::log_info_inline("请输入相关命令> ");
 }

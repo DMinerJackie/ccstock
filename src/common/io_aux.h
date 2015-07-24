@@ -40,7 +40,7 @@ public:
     }
 
     template <typename T>
-    static bool list_out(const std::vector<int>width, const char* endctl, std::initializer_list<T> list)
+    static void list_out(const std::vector<int>width, const char* endctl, std::initializer_list<T> list)
     {
         size_t idx = 0;
         for (auto elem : list) {
@@ -50,7 +50,7 @@ public:
     }
 
     template <typename T>
-    static bool list_out(const char* midctl, const char* endctl, std::initializer_list<T> list)
+    static void list_out(const char* midctl, const char* endctl, std::initializer_list<T> list)
     {
         size_t idx = 0;
         for (auto elem : list) {

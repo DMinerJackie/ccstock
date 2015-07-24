@@ -42,6 +42,7 @@ public:
         desc.add_options()
             (name, po::value<T>(), opt_desc)
         ;
+        return true;
     }
     bool is_option_set(const std::string& name)
     {
@@ -80,6 +81,7 @@ public:
     bool parse_xml_file(const string& xml_file_name)
     {
         pt::read_xml(xml_file_name, tree, pt::xml_parser::no_comments);
+        return true;
     }
     void show_options()
     {

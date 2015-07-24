@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 00时13分41秒
-*Last Modified: 2015年07月23日 星期四 22时42分43秒
+*Last Modified: 2015年07月25日 星期六 00时14分43秒
 *Purpose:
 **/
 
@@ -50,6 +50,7 @@ public:
     }
 
     static void code_error(const string& code) { cerr << "股票代码(简拼)[" << code << "]不存在，请检查！" << endl; }
+    static void cmd_error(const string& code) { cerr << "未知命令[" << code << "]，请检查！" << endl; }
 };
 
 }

@@ -33,11 +33,10 @@ public:
     bool crawler_content(std::string& user_data, gen_qry_str_func qry_str_func) {
         if (!qry_str_func()) { return false; }
         if (curl) {
-            CURLcode res;
             curl_easy_setopt(curl, CURLOPT_URL, qry_str.c_str());
             curl_easy_setopt(curl, CURLOPT_WRITEDATA, (void *) &user_data);
             curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, write_cb);
-            res = curl_easy_perform(curl);
+            curl_easy_perform(curl);
             return true;
         }
         return false;

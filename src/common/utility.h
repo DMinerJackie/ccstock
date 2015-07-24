@@ -106,6 +106,7 @@ public:
     {
         std::sort(data.begin(), data.end());
         data.erase(std::unique(data.begin(), data.end()), data.end());
+        return true;
     }
     template <typename T>
     static bool remove_common_vector(std::vector<T>& vec1, std::vector<T>& vec2)
@@ -116,6 +117,7 @@ public:
                 vec2.begin(), vec2.end(),
                 vec1.begin());
         vec1.erase(end_range, vec1.end());
+        return true;
     }
 };
 }
