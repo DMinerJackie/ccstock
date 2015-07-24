@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月23日 星期四 20时00分08秒
-*Last Modified: 2015年07月24日 星期五 22时00分14秒
+*Last Modified: 2015年07月24日 星期五 22时28分05秒
 *Purpose: 日期类封装
 **/
 
@@ -32,6 +32,7 @@ public:
             + std::to_string(month) + "-"
             + std::to_string(day);
     }
+
 public:
     std::string get_curr_time()
     {
