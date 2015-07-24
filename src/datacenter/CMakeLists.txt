@@ -15,6 +15,7 @@ ADD_EXECUTABLE(dc
 
 TARGET_LINK_LIBRARIES(dc
     ev
+    curl
     boost_system
     boost_filesystem
     boost_program_options

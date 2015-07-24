@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月19日 星期日 15时14分59秒
-*Last Modified: 2015年07月19日 星期日 16时46分08秒
+*Last Modified: 2015年07月24日 星期五 21时47分17秒
 *Purpose:
 **/
 
@@ -32,7 +32,7 @@ public:
     {
         for (size_t i = 0; i < code_vec.size(); ++i) {
             if ((i != 0 && i % 100 == 0) || i == code_vec.size() - 1) {
-                logger::log_info("成功获取" + std::to_string(i + 1) + "个股票历史交易数据!");
+                logger::log_info("成功获取" + std::to_string(i) + "个股票历史交易数据!");
             }
             set_code_vec({code_vec[i]});
             download(file_name_vec[i].c_str(), std::bind(&self_type::get_qry_str,

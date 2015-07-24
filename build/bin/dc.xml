@@ -1,4 +1,5 @@
 <data>
+    <code_path>data/code/</code_path>
     <!-- 历史数据 -->
     <history>
         <!-- 雅虎历史数据 -->
@@ -8,7 +9,7 @@
     <locate>
         <!-- 文件数据存放地址 -->
         <file>
-            <yahoo>bin/data/history/yahoo/</yahoo>
+            <yahoo>data/history/yahoo/</yahoo>
         </file>
         <!-- 数据存放地址 -->
         <db>

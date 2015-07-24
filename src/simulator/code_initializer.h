@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月06日 星期一 23时54分32秒
-*Last Modified: 2015年07月19日 星期日 19时43分54秒
+*Last Modified: 2015年07月24日 星期五 21时26分52秒
 *Purpose:
 **/
 #ifndef CODE_INITIALIZER_H
@@ -35,6 +35,7 @@ public:
     {
         code_path = config->get_value("stock.market_data.code.code_path", std::string());
         if (!check_prerequisite()) {
+            logger::log_info("系统首次运行初始化...");
             manual_initialize();
         }
         return true;
@@ -42,7 +43,6 @@ public:
     void manual_initialize()
     {
         if (count++ == 0) {
-            logger::log_info("系统首次运行初始化...");
             gen_code();
             gen_code_jp_name();
         }

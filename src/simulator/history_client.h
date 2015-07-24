@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月19日 星期日 16时06分06秒
-*Last Modified: 2015年07月19日 星期日 16时49分10秒
+*Last Modified: 2015年07月24日 星期五 21时45分13秒
 *Purpose:
 **/
 
@@ -23,10 +23,10 @@
 
 namespace simulator {
 
-template <typename history_crawler>
+template <typename yahoo_crawler>
 class history_client {
 public:
-    using self_type     = history_client<history_crawler>;
+    using self_type     = history_client<yahoo_crawler>;
     using file_handler  = simulator::file_handler;
 public:
     void configure(const std::string& code_path_, const std::string& data_path_)
@@ -48,7 +48,7 @@ public:
 private:
     std::string code_path;
     std::string data_path;
-    history_crawler crawler;
+    yahoo_crawler crawler;
 };
 
 }
