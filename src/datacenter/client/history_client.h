@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月19日 星期日 16时06分06秒
-*Last Modified: 2015年07月25日 星期六 12时33分06秒
+*Last Modified: 2015年07月25日 星期六 15时22分22秒
 *Purpose:
 **/
 
@@ -40,7 +40,7 @@ public:
         file_handler::read_code(code_vec, code_path, "all");
 
         // 配置内存数据库
-        history_db_.configure(code_vec, yahoo_db_path);
+        // history_db_.configure(code_vec, yahoo_db_path);
 
         common::io_aux::create_folder(yahoo_data_path.c_str());
     }
