@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月23日 星期四 21时06分10秒
-*Last Modified: 2015年07月24日 星期五 21时12分09秒
+*Last Modified: 2015年07月25日 星期六 11时38分28秒
 *Purpose:
 **/
 
@@ -9,17 +9,19 @@
 #define DC_SERVICE_H_
 
 #include <gateway/yahoo_history_crawler.h>
-#include <simulator/history_client.h>
 #include <common/configurator.h>
 #include <common/logger.h>
 
-using history_crawler           = gateway::yahoo_history_crawler;
-using history_client_t          = simulator::history_client<history_crawler>;
-
-using configurator              = common::configurator;
-using logger                    = common::logger;
+#include "client/history_client.h"
+#include "db/history_db.h"
 
 namespace dc {
+
+using history_crawler           = gateway::yahoo_history_crawler;
+using history_db                = db::history_db;
+using history_client_t          = history_client<history_crawler, history_db>;
+using configurator              = common::configurator;
+using logger                    = common::logger;
 
 struct dc_io_data {
     ev_io watcher;
@@ -42,12 +44,16 @@ public:
     {
         delete config;
     }
+    // 配置程序信息和客户端
     void configure();
+    // 开始事件循环
     void run();
 private:
+    // 控制台输入回调函数
     static void read_cb(EV_P_ ev_io *w, int revents);
 private:
     configurator* config;
+    // 历史数据客户端
     history_client_t history_client_;
 private:
     struct ev_loop* ev_loop;

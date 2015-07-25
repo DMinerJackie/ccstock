@@ -60,6 +60,7 @@ flags = [
 'c++',
 '-isystem',
 './src',
+'./src/datacenter',
 ]
 
 

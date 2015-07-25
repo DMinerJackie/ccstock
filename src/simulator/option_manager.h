@@ -14,14 +14,15 @@
 #include <common/common_defs.h>
 #include <common/utility.h>
 
-#include "file_handler.h"
+#include <common/file/file_handler.h>
 
 namespace simulator {
 
 template <typename code_db, typename md_crawler, typename displayer>
 class option_manager {
-    using utility = common::utility;
-    using self_type = option_manager<code_db, md_crawler, displayer>;
+    using utility      = common::utility;
+    using file_handler = common::file_handler;
+    using self_type    = option_manager<code_db, md_crawler, displayer>;
 public:
     void configure(const std::shared_ptr<code_db>& db_, const std::string& option_path_)
     {

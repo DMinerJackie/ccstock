@@ -20,7 +20,6 @@ public:
         time(&t);
         return ctime(&t);
     }
-
 };
 
 }

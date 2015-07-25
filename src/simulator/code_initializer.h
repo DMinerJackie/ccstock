@@ -14,8 +14,7 @@
 #include <common/common_defs.h>
 #include <common/logger.h>
 #include <common/utility.h>
-
-#include "file_handler.h"
+#include <common/file/file_handler.h>
 
 namespace simulator {
 
@@ -26,6 +25,7 @@ public:
     using io_aux        = common::io_aux;
     using logger        = common::logger;
     using utility       = common::utility;
+    using file_handler  = common::file_handler;
 public:
     code_initializer(const shared_ptr<configurator>& config_):
         config(config_)

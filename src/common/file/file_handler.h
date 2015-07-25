@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 21时15分57秒
-*Last Modified: 2015年07月13日 星期一 00时25分42秒
+*Last Modified: 2015年07月25日 星期六 12时36分42秒
 *Purpose:
 **/
 
@@ -18,14 +18,14 @@
 #include <common/utility.h>
 #include <common/common_defs.h>
 
-#include "instrument/stock.h"
+#include <simulator/instrument/stock.h>
 
-namespace simulator {
+namespace common {
 class file_handler {
 public:
-    using self_type = file_handler;
-    using io_aux    = common::io_aux;
-    using utility   = common::utility;
+    using self_type   = file_handler;
+    using stock       = simulator::stock;
+    using stock_basic = simulator::stock_basic;
 public:
     static bool save_code(cc_vec_string& code_vec, const std::string& dir_path, const std::string& fname)
     {

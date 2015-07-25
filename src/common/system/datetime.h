@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月23日 星期四 20时00分08秒
-*Last Modified: 2015年07月25日 星期六 01时13分47秒
+*Last Modified: 2015年07月25日 星期六 10时42分51秒
 *Purpose: 日期类封装
 **/
 
@@ -13,7 +13,7 @@
 namespace common {
 
 // 获取当前系统日期YYYY-MM-DD
-static std::string get_curr_time(); 
+static std::string get_curr_time();
 
 class datetime {
 public:
@@ -43,7 +43,7 @@ private:
     unsigned char second;
 };
 
-
+// 下面是函数的实现
 std::string get_curr_time()
 {
     char date_ptr[11]; // 存储日期

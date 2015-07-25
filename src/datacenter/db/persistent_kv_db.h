@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月20日 星期一 21时52分51秒
-*Last Modified: 2015年07月23日 星期四 00时08分15秒
+*Last Modified: 2015年07月25日 星期六 12时27分59秒
 *Purpose: leveldb持久化存储
 **/
 
@@ -18,7 +18,7 @@
 
 #include <common/logger.h>
 
-namespace datacenter {
+namespace dc {
 namespace db {
 
 using db_handler    = leveldb::DB;
@@ -58,10 +58,9 @@ public:
     }
     // 读取数据
     template <typename Key, typename Value>
-    bool select(Key& key, const Value& value)
+    db_status select(Key& key, Value& value)
     {
-        db_status status = handler->Get(leveldb::WriteOptions(), key, &value);
-        return status.ok();
+        return  handler->Get(leveldb::ReadOptions(), key, &value);
     }
     // 删除数据
     template <typename Key>

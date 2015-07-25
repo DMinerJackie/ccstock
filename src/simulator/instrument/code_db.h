@@ -15,7 +15,7 @@
 #include <cctype>
 
 #include <common/logger.h>
-#include <simulator/file_handler.h>
+#include <common/file/file_handler.h>
 
 #include "stock.h"
 
@@ -23,7 +23,8 @@ namespace simulator {
 
 // 内存数据库，方便快速查找验证
 class code_db {
-    using logger = common::logger;
+    using logger       = common::logger;
+    using file_handler = common::file_handler;
 public:
     // 配置数据
     bool configure(const std::string& code_path);

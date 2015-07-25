@@ -1,5 +1,5 @@
 /**
-*Author: Steve Zhong 
+*Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 00时13分41秒
 *Last Modified: 2015年07月19日 星期日 16时05分54秒
 *Purpose:
@@ -17,7 +17,7 @@
 #include <memory>
 #include <cstdint> // int32_t, uint32_t
 
-#include <simulator/file_handler.h>
+#include <common/file/file_handler.h>
 #include <common/utility.h>
 #include <common/io_aux.h>
 #include <common/configurator.h>
@@ -32,7 +32,7 @@ template <typename code_db, typename md_crawler, typename displayer>
 class market_data_client {
 public:
     using self_type     = market_data_client<code_db, md_crawler, displayer>;
-    using file_handler  = simulator::file_handler;
+    using file_handler  = common::file_handler;
     using utility       = common::utility;
     using configurator  = common::configurator;
     using logger        = common::logger;

@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月23日 星期四 23时08分02秒
-*Last Modified: 2015年07月25日 星期六 00时17分01秒
+*Last Modified: 2015年07月25日 星期六 11时45分10秒
 *Purpose:
 **/
 
@@ -20,7 +20,8 @@ void dc_service::configure()
     std::string code_path = config->get_value("data.code_path", std::string());
     // 设置历史数据文件存放位置
     history_client_.configure(code_path,
-            config->get_value("data.locate.file.yahoo", std::string()));
+            config->get_value("data.locate.file.yahoo", std::string()),
+            config->get_value("data.locate.db.yahoo", std::string()));
 }
 
 void dc_service::run()
