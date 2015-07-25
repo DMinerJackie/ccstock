@@ -1,11 +1,13 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月25日 星期六 11时14分13秒
-*Last Modified: 2015年07月25日 星期六 12时30分31秒
+*Last Modified: 2015年07月25日 星期六 17时17分14秒
 *Purpose:
 **/
 
 #include <tools/history.h>
+#include <common/logger.h>
+#include <common/io_aux.h>
 
 #include "history_db.h"
 
@@ -18,19 +20,25 @@ std::unordered_map<std::string, std::string> history_db::yahoo_end;
 bool history_db::configure(const cc_vec_string& code_vec,
         const string& yahoo_db_path)
 {
+    common::io_aux::create_folder(yahoo_db_path.c_str());
     kv_db_.configure(yahoo_db_path);
-    kv_db_.open();
-    std::string end_date;
-    for (auto code : code_vec) {
-        if (kv_db_.select(code, end_date).ok()) {
-            yahoo_end[code] = end_date;
+    if (kv_db_.open()) {
+        std::string end_date;
+        for (auto code : code_vec) {
+            if (kv_db_.select(code, end_date).ok()) {
+                yahoo_end[code] = end_date;
+            }
+            else {
+                yahoo_end[code] = BEGIN_DATE;
+            }
         }
-        else {
-            yahoo_end[code] = BEGIN_DATE;
-        }
+        kv_db_.close();
+        return true;
     }
-    kv_db_.close();
-    return true;
+    else {
+        common::logger::log_info("数据库打开失败，请检查！");
+    }
+    return false;
 }
 
 bool history_db::yahoo_check_empty(const std::string& code) const 

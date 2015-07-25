@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月20日 星期一 21时52分51秒
-*Last Modified: 2015年07月25日 星期六 12时27分59秒
+*Last Modified: 2015年07月25日 星期六 16时57分35秒
 *Purpose: leveldb持久化存储
 **/
 
@@ -45,9 +45,7 @@ public:
     bool open()
     {
         db_status status = db_handler::Open(options, db_path, &handler); 
-        if (status.ok())
-            return true;
-        return false;
+        return status.ok();
     }
     // 插入数据
     template <typename Key, typename Value>

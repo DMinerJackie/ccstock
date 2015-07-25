@@ -9,11 +9,18 @@
     <locate>
         <!-- 文件数据存放地址 -->
         <file>
-            <yahoo>data/history/yahoo/</yahoo>
+            <yahoo>bin/data/history/yahoo/</yahoo>
         </file>
         <!-- 数据存放地址 -->
         <db>
             <yahoo>/tmp/db/yahoo/</yahoo>
         </db>
     </locate>
-</stock>
+    <!-- api接口 -->
+    <api>
+        <!-- 历史数据api -->
+        <history>
+            <yahoo>http://ichart.yahoo.com/table.csv?s=</yahoo>
+        </history>
+    </api>
+</data>
