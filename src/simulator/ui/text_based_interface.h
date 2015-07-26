@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月11日 星期六 17时16分48秒
-*Last Modified: 2015年07月13日 星期一 00时15分19秒
+*Last Modified: 2015年07月26日 星期日 11时19分56秒
 *Purpose:
 **/
 #ifndef TEXT_BASED_INTERFACE_H
@@ -16,9 +16,9 @@
 #include <ncurses.h>
 
 #include <common/common_defs.h>
+#include <common/system/cctime.h>
 #include <simulator/instrument/stock.h>
 
-#include "systime.h"
 #include "ui_common.h"
 
 
@@ -81,7 +81,7 @@ private:
     }
     void print_header(const char* header_name)
     {
-        mvprintw(0, 0, "%s    %s", header_name, systime::get_curr_time());
+        mvprintw(0, 0, "%s    %s", header_name, common::timeutility::get_curr_date_time().c_str());
     }
     void stock_info(const std::vector<stock>& stock_vec)
     {

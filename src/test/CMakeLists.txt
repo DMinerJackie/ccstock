@@ -6,6 +6,7 @@ INCLUDE_DIRECTORIES(
 
 ADD_EXECUTABLE(test
     test_main.cpp
+    ${ROOT_PATH}/common/system/cctime.cpp
 )
 
 TARGET_LINK_LIBRARIES(test

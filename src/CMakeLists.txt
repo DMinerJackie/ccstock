@@ -1,6 +1,9 @@
 INCLUDE_DIRECTORIES( ${CMAKE_CURRENT_SOURCE_DIR} )
 
-ADD_EXECUTABLE(ccstock ccstock.cpp)
+ADD_EXECUTABLE(ccstock 
+    ccstock.cpp
+    common/system/cctime.cpp
+)
 
 TARGET_LINK_LIBRARIES(ccstock
     ncursesw

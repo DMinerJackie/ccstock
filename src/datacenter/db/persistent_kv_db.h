@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月20日 星期一 21时52分51秒
-*Last Modified: 2015年07月25日 星期六 16时57分35秒
+*Last Modified: 2015年07月26日 星期日 10时56分40秒
 *Purpose: leveldb持久化存储
 **/
 
@@ -24,8 +24,6 @@ namespace db {
 using db_handler    = leveldb::DB;
 using db_status     = leveldb::Status;
 using db_options    = leveldb::Options;
-
-// 内存数据库，方便快速查找验证
 
 class kv_db {
     using logger = common::logger;

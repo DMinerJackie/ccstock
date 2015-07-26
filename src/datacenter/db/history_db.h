@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月25日 星期六 10时58分00秒
-*Last Modified: 2015年07月25日 星期六 12时02分59秒
+*Last Modified: 2015年07月25日 星期六 23时27分38秒
 *Purpose: leveldb持久化存储
 **/
 
@@ -37,7 +37,6 @@ private:
     static std::unordered_map<std::string, std::string> yahoo_end;
 private:
     kv_db kv_db_;
-
 }; 
 
 }

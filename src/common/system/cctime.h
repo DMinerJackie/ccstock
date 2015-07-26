@@ -1,20 +1,45 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月23日 星期四 20时00分08秒
-*Last Modified: 2015年07月25日 星期六 10时42分51秒
+*Last Modified: 2015年07月26日 星期日 11时40分18秒
 *Purpose: 日期类封装
 **/
 
-#ifndef DATATIME_H_
-#define DATATIME_H_
+#ifndef CCTIME_H_
+#define CCTIME_H_
 
 #include <string>
+#include <ctime>
 
 namespace common {
 
-// 获取当前系统日期YYYY-MM-DD
-static std::string get_curr_time();
+// 时间封装类
+class timeutility {
+public:
+    timeutility() { }
+    // 通过YYYY-MM-DD构造
+    timeutility(const std::string& date);
+public:
+    // 时间增加几天
+    std::string add_day(size_t n);
+public:
+    // 获取当前系统日期YYYY-MM-DD
+    static std::string get_curr_date();
+    // 获取当前系统日期和时间YYYY-MM-DD HH:MM:SS
+    static std::string get_curr_date_time();
+private:
+    // 获取当前时间和日期
+    static void curr_time() {
+        time(&rawtime);
+        timeinfo = localtime(&rawtime);
+    }
+private:
+    static char data_ptr[30];
+    static time_t rawtime;
+    static tm* timeinfo;
+};
 
+// 未完成。。。
 class datetime {
 public:
     datetime() { }
@@ -42,18 +67,6 @@ private:
     unsigned char minute;
     unsigned char second;
 };
-
-// 下面是函数的实现
-std::string get_curr_time()
-{
-    char date_ptr[11]; // 存储日期
-    time_t rawtime;
-    struct tm* timeinfo;
-    time(&rawtime);
-    timeinfo = localtime(&rawtime);
-    strftime(date_ptr, 11, "%F", timeinfo);
-    return std::string(date_ptr);
-}
 
 }
 
