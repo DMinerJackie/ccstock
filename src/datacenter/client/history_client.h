@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月19日 星期日 16时06分06秒
-*Last Modified: 2015年07月25日 星期六 17时08分18秒
+*Last Modified: 2015年07月26日 星期日 12时26分19秒
 *Purpose:
 **/
 
@@ -19,6 +19,9 @@
 #include <common/file/file_handler.h>
 #include <common/common_defs.h>
 #include <common/io_aux.h>
+#include <common/system/cctime.h>
+
+#include <datacenter/db/persistent_kv_db.h>
 
 namespace dc {
 
@@ -52,6 +55,19 @@ public:
         }
         crawler.get_history_all(code_vec, fname_vec);
     }
+    void get_history_inc()
+    {
+        cc_vec_string fname_vec;
+        std::vector<common::time_adt> endtime_vec;
+        for (size_t idx = 0; idx < code_vec.size(); ++idx) {
+            fname_vec.push_back(yahoo_data_path + code_vec[idx] + "_all.csv");
+        }
+        crawler.get_history_all(code_vec, fname_vec);
+    }
+private:
+    void get_endtime()
+    {
+    }
 private:
     std::string code_path;
     std::string yahoo_data_path;
@@ -61,6 +77,7 @@ private:
 private:
     yahoo_crawler crawler;
     history_db history_db_;
+    db::kv_db kv_db_;
 };
 
 }

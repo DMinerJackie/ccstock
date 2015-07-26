@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月23日 星期四 20时00分08秒
-*Last Modified: 2015年07月26日 星期日 11时40分18秒
+*Last Modified: 2015年07月26日 星期日 12时18分36秒
 *Purpose: 日期类封装
 **/
 
@@ -12,6 +12,8 @@
 #include <ctime>
 
 namespace common {
+
+using time_adt = tm*;
 
 // 时间封装类
 class timeutility {
