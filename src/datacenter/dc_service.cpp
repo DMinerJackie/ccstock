@@ -1,17 +1,20 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月23日 星期四 23时08分02秒
-*Last Modified: 2015年07月25日 星期六 11时45分10秒
+*Last Modified: 2015年07月27日 星期一 21时35分27秒
 *Purpose:
 **/
 
 #include "dc_service.h"
+
+#include <common/logger.h>
 
 namespace dc {
 
 void dc_service::configure()
 {
     config->add_plain_option("history,H", "获取历史数据");
+    config->add_plain_option("init-endtime", "手动初始化时间");
     // config->parse_command_line(argc, argv);
     config->parse_xml_file("dc.xml");
     // 传递配置信息
@@ -21,12 +24,13 @@ void dc_service::configure()
     // 设置历史数据文件存放位置
     history_client_.configure(code_path,
             config->get_value("data.locate.file.yahoo", std::string()),
-            config->get_value("data.locate.db.yahoo", std::string()));
+            config->get_value("data.locate.db.yahoo", std::string()),
+            config->get_value("data.api.history.yahoo", std::string()));
 }
 
 void dc_service::run()
 {
-    logger::log_info_inline("请输入相关命令> ");
+    common::logger::log_info_inline("请输入相关命令> ");
     ev_run(ev_loop, 0); 
 }
 
@@ -38,7 +42,11 @@ void dc_service::read_cb(EV_P_ ev_io *w, int revents)
     std::cin >> command;
     // 获取历史数据
     if (command == "history" || command == "H") {
-        io_data->history_client->get_history_all();
+        io_data->history_client->get_history_inc();
+    }
+    // 手动初始化时间
+    else if (command == "init-endtime") {
+        io_data->history_client->init_endtime();
     }
     // 退出
     else if (command == "quit" || command == "q") {
@@ -47,9 +55,9 @@ void dc_service::read_cb(EV_P_ ev_io *w, int revents)
     }
     // 未知的命令
     else {
-        logger::cmd_error(command);
+        common::logger::cmd_error(command);
     }
-    logger::log_info_inline("请输入相关命令> ");
+    common::logger::log_info_inline("请输入相关命令> ");
 }
 
 }

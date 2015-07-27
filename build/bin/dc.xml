@@ -9,7 +9,7 @@
     <locate>
         <!-- 文件数据存放地址 -->
         <file>
-            <yahoo>bin/data/history/yahoo/</yahoo>
+            <yahoo>data/history/yahoo/</yahoo>
         </file>
         <!-- 数据存放地址 -->
         <db>

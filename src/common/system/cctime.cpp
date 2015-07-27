@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期日 10时55分24秒
-*Last Modified: 2015年07月26日 星期日 11时50分15秒
+*Last Modified: 2015年07月27日 星期一 20时21分40秒
 *Purpose:
 **/
 
@@ -9,35 +9,65 @@
 
 namespace common {
 
-// static成员变量定义
-char timeutility::data_ptr[30];
-time_t timeutility::rawtime;
-tm* timeutility::timeinfo;
-
-timeutility::timeutility(const std::string& date)
+timewrapper::timewrapper()
 {
+    timeinfo = new tm();
+    curr_time(timeinfo);
+    strftime(data_ptr, 11, "%F", timeinfo);
+}
+
+timewrapper::timewrapper(const std::string& date)
+{
+    timeinfo = new tm();
     strptime(date.c_str(), "%F", timeinfo);
 }
 
-std::string timeutility::add_day(size_t n)
+void timewrapper::add_day(tm* timeinfo, const size_t n)
 {
     timeinfo->tm_mday += n;
-    rawtime = mktime(timeinfo);
-    timeinfo = localtime(&rawtime);
+    mktime(timeinfo);
+}
+
+void timewrapper::add_day(const size_t n)
+{
+    timeinfo->tm_mday += n;
+    mktime(timeinfo);
+}
+
+tm* timewrapper::get_tm_from_string(const std::string& date)
+{
+    tm *timeinfo = new tm();
+    strptime(date.c_str(), "%F", timeinfo);
+    return timeinfo;
+}
+
+std::string timewrapper::date_to_string()
+{
     strftime(data_ptr, 11, "%F", timeinfo);
     return std::string(data_ptr);
 }
 
-std::string timeutility::get_curr_date()
+std::string timewrapper::get_string_from_tm(const tm *timeinfo)
 {
-    curr_time();
+    char data_ptr[11];
     strftime(data_ptr, 11, "%F", timeinfo);
     return std::string(data_ptr);
 }
 
-std::string timeutility::get_curr_date_time()
+std::string timewrapper::get_curr_date()
 {
-    curr_time();
+    tm* timeinfo = new tm();
+    curr_time(timeinfo);
+    char data_ptr[11];
+    strftime(data_ptr, 11, "%F", timeinfo);
+    return std::string(data_ptr);
+}
+
+std::string timewrapper::get_curr_date_time()
+{
+    tm* timeinfo = new tm();
+    curr_time(timeinfo);
+    char data_ptr[20];
     strftime(data_ptr, 20, "%F %T", timeinfo);
     return std::string(data_ptr);
 }

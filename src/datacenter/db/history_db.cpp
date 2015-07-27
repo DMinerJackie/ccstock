@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月25日 星期六 11时14分13秒
-*Last Modified: 2015年07月25日 星期六 17时17分14秒
+*Last Modified: 2015年07月27日 星期一 21时47分32秒
 *Purpose:
 **/
 
@@ -17,11 +17,15 @@ namespace db {
 // 静态类成员定义
 std::unordered_map<std::string, std::string> history_db::yahoo_end;
 
-bool history_db::configure(const cc_vec_string& code_vec,
-        const string& yahoo_db_path)
+bool history_db::configure(const string& yahoo_db_path)
 {
     common::io_aux::create_folder(yahoo_db_path.c_str());
     kv_db_.configure(yahoo_db_path);
+    return false;
+}
+
+bool history_db::run(const cc_vec_string& code_vec)
+{
     if (kv_db_.open()) {
         std::string end_date;
         for (auto code : code_vec) {
@@ -37,8 +41,8 @@ bool history_db::configure(const cc_vec_string& code_vec,
     }
     else {
         common::logger::log_info("数据库打开失败，请检查！");
-    }
-    return false;
+        return false;
+    } 
 }
 
 bool history_db::yahoo_check_empty(const std::string& code) const 

@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月23日 星期四 20时00分08秒
-*Last Modified: 2015年07月26日 星期日 12时18分36秒
+*Last Modified: 2015年07月27日 星期一 22时03分47秒
 *Purpose: 日期类封装
 **/
 
@@ -13,17 +13,37 @@
 
 namespace common {
 
-using time_adt = tm*;
+using timeadt = tm;
 
 // 时间封装类
-class timeutility {
+class timewrapper {
 public:
-    timeutility() { }
+    // 默认未当前时间
+    timewrapper();
     // 通过YYYY-MM-DD构造
-    timeutility(const std::string& date);
+    timewrapper(const std::string& date);
+public:
+    // 判断日期YYYY-MM-DD是否相等
+    bool is_date_equal(const timewrapper& rsh) {
+        return timeinfo->tm_year == rsh.timeinfo->tm_year
+            && timeinfo->tm_mon == rsh.timeinfo->tm_mon
+            && timeinfo->tm_mday == rsh.timeinfo->tm_mday;
+    }
+public:
+    int get_year() { return timeinfo->tm_year + 1900; }
+    int get_month() { return timeinfo->tm_mon + 1; }
+    int get_day() { return timeinfo->tm_mday; }
 public:
     // 时间增加几天
-    std::string add_day(size_t n);
+    void add_day(const size_t n);
+    // 静态成员函数
+    static void add_day(timeadt *timeadt_, const size_t n);
+    // 将string类型date转换为tm结构
+    static timeadt* get_tm_from_string(const std::string& date);
+    // 将time转换为string结构
+    std::string date_to_string();
+    // 静态成员函数
+    static std::string get_string_from_tm(const timeadt *timeadt_);
 public:
     // 获取当前系统日期YYYY-MM-DD
     static std::string get_curr_date();
@@ -31,14 +51,15 @@ public:
     static std::string get_curr_date_time();
 private:
     // 获取当前时间和日期
-    static void curr_time() {
-        time(&rawtime);
-        timeinfo = localtime(&rawtime);
+    static void curr_time(tm* &timeinfo) {
+        time_t timer;
+        time(&timer);
+        timeinfo = localtime(&timer);
     }
 private:
-    static char data_ptr[30];
-    static time_t rawtime;
-    static tm* timeinfo;
+    char data_ptr[30];
+    time_t rawtime;
+    tm* timeinfo;
 };
 
 // 未完成。。。

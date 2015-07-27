@@ -1,5 +1,7 @@
 SET( ROOT_PATH ${CMAKE_CURRENT_SOURCE_DIR}/../ )
 
+SET( CMAKE_BUILD_TYPE Debug )
+
 message(${ROOT_PATH})
 INCLUDE_DIRECTORIES(
     ${CMAKE_CURRENT_SOURCE_DIR}
@@ -9,6 +11,7 @@ INCLUDE_DIRECTORIES(
 ADD_EXECUTABLE(dc
     dc.cpp
     dc_service.cpp
+    ${ROOT_PATH}/common/system/cctime.cpp
     db/history_db.cpp
 )
 

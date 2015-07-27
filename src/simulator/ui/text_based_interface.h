@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月11日 星期六 17时16分48秒
-*Last Modified: 2015年07月26日 星期日 11时19分56秒
+*Last Modified: 2015年07月26日 星期日 17时39分27秒
 *Purpose:
 **/
 #ifndef TEXT_BASED_INTERFACE_H
@@ -81,7 +81,7 @@ private:
     }
     void print_header(const char* header_name)
     {
-        mvprintw(0, 0, "%s    %s", header_name, common::timeutility::get_curr_date_time().c_str());
+        mvprintw(0, 0, "%s    %s", header_name, common::timewrapper::get_curr_date_time().c_str());
     }
     void stock_info(const std::vector<stock>& stock_vec)
     {

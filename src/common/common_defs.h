@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 00时13分41秒
-*Last Modified: 2015年07月24日 星期五 00时32分26秒
+*Last Modified: 2015年07月26日 星期日 20时11分29秒
 *Purpose:
 **/
 
@@ -41,6 +41,7 @@ enum class stock_type { SH, SZ };
 }
 
 using gen_qry_str_func = std::function<bool()>;
+using api_generator = std::function<bool(void*)>;
 
 using get_code_func = std::function<void()>;
 using gen_code_map  = std::unordered_map<std::string, get_code_func>;

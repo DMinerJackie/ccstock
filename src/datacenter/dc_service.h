@@ -1,16 +1,15 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月23日 星期四 21时06分10秒
-*Last Modified: 2015年07月26日 星期日 12时22分12秒
+*Last Modified: 2015年07月27日 星期一 21时09分39秒
 *Purpose:
 **/
 
 #ifndef DC_SERVICE_H_
 #define DC_SERVICE_H_
 
-#include <gateway/yahoo_history_crawler.h>
 #include <common/configurator.h>
-#include <common/logger.h>
+#include <gateway/yahoo_history_crawler.h>
 
 #include "client/history_client.h"
 #include "db/history_db.h"
@@ -21,12 +20,11 @@ using history_crawler           = gateway::yahoo_history_crawler;
 using history_db                = db::history_db;
 using history_client_t          = history_client<history_crawler, history_db>;
 using configurator              = common::configurator;
-using logger                    = common::logger;
 
 struct dc_io_data {
     ev_io watcher;
     configurator *config;
-    history_client_t * history_client;
+    history_client_t *history_client;
 };
 
 class dc_service {

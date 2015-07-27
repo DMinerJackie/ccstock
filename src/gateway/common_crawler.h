@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月06日 星期一 20时14分24秒
-*Last Modified: 2015年07月20日 星期一 00时01分01秒
+*Last Modified: 2015年07月26日 星期日 20时15分28秒
 *Purpose: 爬虫基类
 **/
 
@@ -45,6 +45,21 @@ public:
     bool download(const char *out_file_name, gen_qry_str_func qry_str_func)
     {
         if (!qry_str_func()) { return false; }
+        if (curl) {
+            FILE *fp = fopen(out_file_name, "wb");
+            curl_easy_setopt(curl, CURLOPT_URL, qry_str.c_str());
+            curl_easy_setopt(curl, CURLOPT_WRITEFUNCTION, download_cb);
+            curl_easy_setopt(curl, CURLOPT_WRITEDATA, fp);
+            curl_easy_perform(curl);
+            fclose(fp);
+            return true;
+        }
+        return false;
+    }
+    // 下载文件
+    bool download(const char *out_file_name, api_generator api_generator_, void *user_ptr)
+    {
+        if (!api_generator_(user_ptr)) { return false; }
         if (curl) {
             FILE *fp = fopen(out_file_name, "wb");
             curl_easy_setopt(curl, CURLOPT_URL, qry_str.c_str());

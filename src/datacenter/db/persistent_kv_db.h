@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月20日 星期一 21时52分51秒
-*Last Modified: 2015年07月26日 星期日 10时56分40秒
+*Last Modified: 2015年07月27日 星期一 20时20分55秒
 *Purpose: leveldb持久化存储
 **/
 
@@ -16,8 +16,6 @@
 
 #include <leveldb/db.h>
 
-#include <common/logger.h>
-
 namespace dc {
 namespace db {
 
@@ -26,7 +24,6 @@ using db_status     = leveldb::Status;
 using db_options    = leveldb::Options;
 
 class kv_db {
-    using logger = common::logger;
 public:
     ~kv_db()
     {
