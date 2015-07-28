@@ -13,8 +13,6 @@
 
 namespace common {
 
-using timeadt = tm;
-
 // 时间封装类
 class timewrapper {
 public:
@@ -37,13 +35,13 @@ public:
     // 时间增加几天
     void add_day(const size_t n);
     // 静态成员函数
-    static void add_day(timeadt *timeadt_, const size_t n);
+    static void add_day(tm* timeinfo, const size_t n);
     // 将string类型date转换为tm结构
-    static timeadt* get_tm_from_string(const std::string& date);
+    static tm* get_tm_from_string(const std::string& date);
     // 将time转换为string结构
     std::string date_to_string();
     // 静态成员函数
-    static std::string get_string_from_tm(const timeadt *timeadt_);
+    static std::string get_string_from_tm(const tm* timeinfo);
 public:
     // 获取当前系统日期YYYY-MM-DD
     static std::string get_curr_date();

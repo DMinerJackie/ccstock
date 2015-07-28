@@ -30,6 +30,7 @@ bool history_db::run(const cc_vec_string& code_vec)
         std::string end_date;
         for (auto code : code_vec) {
             if (kv_db_.select(code, end_date).ok()) {
+                // common::logger::log_info(end_date);
                 yahoo_end[code] = end_date;
             }
             else {
@@ -42,10 +43,10 @@ bool history_db::run(const cc_vec_string& code_vec)
     else {
         common::logger::log_info("数据库打开失败，请检查！");
         return false;
-    } 
+    }
 }
 
-bool history_db::yahoo_check_empty(const std::string& code) const 
+bool history_db::yahoo_check_empty(const std::string& code) const
 {
     return yahoo_end.find(code) == yahoo_end.end();
 }

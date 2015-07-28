@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月19日 星期日 16时06分06秒
-*Last Modified: 2015年07月27日 星期一 21时59分42秒
+*Last Modified: 2015年07月28日 星期二 20时38分14秒
 *Purpose:
 **/
 
@@ -48,19 +48,9 @@ public:
         // 配置LevelDB
         kv_db_.configure(yahoo_db_path_);
         // 配置crawler
-        crawler.configure(yahoo_api_); 
+        crawler.configure(yahoo_api_);
         // 创建文件夹
         common::io_aux::create_folder(yahoo_data_path.c_str());
-    }
-    // 获取股票的全部历史数据
-    void get_history_all()
-    {
-        cc_vec_string fname_vec;
-        // 生成下载的文件名
-        for (size_t idx = 0; idx < code_vec.size(); ++idx) {
-            fname_vec.push_back(yahoo_data_path + code_vec[idx] + "_all.csv");
-        }
-        crawler.get_history_all(code_vec, fname_vec);
     }
     // 增量方式获得部分股票历史数据
     void get_history_inc();
@@ -93,7 +83,7 @@ void history_client<yahoo_crawler, history_db>::get_history_inc()
     for (size_t idx = 0; idx < code_vec.size(); ++idx) {
         fname_vec.push_back(yahoo_data_path + code_vec[idx]
                 + "_"
-                + common::timewrapper::get_curr_date() 
+                + common::timewrapper::get_curr_date()
                 + ".csv");
     }
     // 增量获取部分历史数据
