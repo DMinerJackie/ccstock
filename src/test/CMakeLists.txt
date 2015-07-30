@@ -14,6 +14,9 @@ TARGET_LINK_LIBRARIES(test
     ncurses
     curl
     leveldb
+    boost_system
+    boost_filesystem
+    boost_program_options
 )
 
 SET(CMAKE_CXX_FLAGS "${CMAKE_CXX_FLAGS} -Wall -Wno-unused-variable -Wno-unused-function -O2 -std=c++11" )

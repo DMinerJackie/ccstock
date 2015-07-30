@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月19日 星期日 15时14分59秒
-*Last Modified: 2015年07月28日 星期二 20时34分00秒
+*Last Modified: 2015年07月30日 星期四 20时19分07秒
 *Purpose:
 **/
 
@@ -56,8 +56,6 @@ public:
                     std::bind(&self_type::get_range_qry_str, this, std::placeholders::_1),
                     (void *) &user_data_))
             {
-                // 更新为当前时间
-                endtime_vec[i]= common::timewrapper();
             }
         }
         return true;

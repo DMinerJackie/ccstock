@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月23日 星期四 20时00分08秒
-*Last Modified: 2015年07月27日 星期一 22时03分47秒
+*Last Modified: 2015年07月30日 星期四 20时59分40秒
 *Purpose: 日期类封装
 **/
 
@@ -33,10 +33,10 @@ public:
     int get_day() { return timeinfo->tm_mday; }
 public:
     // 时间增加几天
-    void add_day(const size_t n);
+    void add_day(const int n);
     // 静态成员函数
-    static void add_day(tm* timeinfo, const size_t n);
-    // 将string类型date转换为tm结构
+    static void add_day(tm* timeinfo, const int n);
+   // 将string类型date转换为tm结构
     static tm* get_tm_from_string(const std::string& date);
     // 将time转换为string结构
     std::string date_to_string();

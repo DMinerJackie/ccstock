@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期日 10时55分24秒
-*Last Modified: 2015年07月27日 星期一 20时21分40秒
+*Last Modified: 2015年07月30日 星期四 21时00分01秒
 *Purpose:
 **/
 
@@ -22,13 +22,13 @@ timewrapper::timewrapper(const std::string& date)
     strptime(date.c_str(), "%F", timeinfo);
 }
 
-void timewrapper::add_day(tm* timeinfo, const size_t n)
+void timewrapper::add_day(tm* timeinfo, const int n)
 {
     timeinfo->tm_mday += n;
     mktime(timeinfo);
 }
 
-void timewrapper::add_day(const size_t n)
+void timewrapper::add_day(const int n)
 {
     timeinfo->tm_mday += n;
     mktime(timeinfo);
