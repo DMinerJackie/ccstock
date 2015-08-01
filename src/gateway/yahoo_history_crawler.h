@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月19日 星期日 15时14分59秒
-*Last Modified: 2015年07月30日 星期四 20时19分07秒
+*Last Modified: 2015年07月31日 星期五 21时02分16秒
 *Purpose:
 **/
 
@@ -46,9 +46,6 @@ public:
     {
         user_data user_data_;
         for (size_t i = 0; i < code_vec.size(); ++i) {
-            if ((i != 0 && i % 100 == 0) || i == code_vec.size() - 1) {
-                logger::log_info("成功获取" + std::to_string(i) + "个股票历史交易数据!");
-            }
             // 传递用户数据
             user_data_.code = code_vec[i];
             user_data_.endtime = endtime_vec[i];
@@ -56,6 +53,9 @@ public:
                     std::bind(&self_type::get_range_qry_str, this, std::placeholders::_1),
                     (void *) &user_data_))
             {
+                if ((i != 0 && i % 100 == 0) || i == code_vec.size() - 1) {
+                    logger::log_info("成功获取" + std::to_string(i) + "个股票历史交易数据!");
+                }
             }
         }
         return true;

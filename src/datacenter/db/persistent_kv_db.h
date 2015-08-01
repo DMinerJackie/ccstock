@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月20日 星期一 21时52分51秒
-*Last Modified: 2015年07月27日 星期一 20时20分55秒
+*Last Modified: 2015年07月31日 星期五 23时51分18秒
 *Purpose: leveldb持久化存储
 **/
 
@@ -15,6 +15,7 @@
 #include <cctype>
 
 #include <leveldb/db.h>
+#include <common/logger.h>
 
 namespace dc {
 namespace db {
@@ -40,7 +41,13 @@ public:
     bool open()
     {
         db_status status = db_handler::Open(options, db_path, &handler); 
-        return status.ok();
+        if (status.ok()) {
+            return true;
+        }
+        else {
+            common::logger::log_info("数据库打开失败: " + status.ToString());
+            return false;
+        }
     }
     // 插入数据
     template <typename Key, typename Value>

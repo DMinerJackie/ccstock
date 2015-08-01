@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月11日 星期六 17时16分48秒
-*Last Modified: 2015年07月26日 星期日 17时39分27秒
+*Last Modified: 2015年08月01日 星期六 11时53分04秒
 *Purpose:
 **/
 #ifndef TEXT_BASED_INTERFACE_H
@@ -9,6 +9,7 @@
 
 #include <vector>
 #include <cstring>
+#include <cstdlib>
 #include <clocale>
 
 #include <cstdio>
@@ -57,18 +58,33 @@ public:
             ++row;
         }
         refresh();
+        nodelay(win_handle, TRUE);
+        if (kbhit('q')) {
+            endwin();
+            exit(EXIT_SUCCESS);
+        }
     }
     void print_stock(const std::vector<stock>& stock_vec, const char* header_name)
     {
         initialize();
         print_header(header_name);
         stock_info(stock_vec);
+        nodelay(win_handle, TRUE);
+        if (kbhit('q')) {
+            endwin();
+            exit(EXIT_SUCCESS);
+        }
     }
     void print_options(const std::vector<stock>& stock_vec)
     {
         initialize();
         print_header("自选股行情");
         stock_info(stock_vec);
+        nodelay(win_handle, TRUE);
+        if (kbhit('q')) {
+            endwin();
+            exit(EXIT_SUCCESS);
+        }
     }
 private:
     void initialize()
@@ -221,6 +237,13 @@ private:
             mvaddstr(row, col, val.c_str());
             attroff(COLOR_PAIR(2));
         }
+    }
+private:
+    int kbhit(char target_ch)
+    {
+        int ch = getch();
+        if (ch != ERR) { return ch == target_ch; }
+        else { return 0; }
     }
 private:
     int row_, col_;

@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年07月30日 星期四 19时27分12秒
-*Last Modified: 2015年07月31日 星期五 01时01分19秒
+*Last Modified: 2015年07月31日 星期五 20时56分00秒
 *Purpose: yahoo历史数据处理 
 **/
 
@@ -54,7 +54,7 @@ public:
 private:
     void assign_member(yahoo_hist& hist, const std::string& data)
     {
-        common::logger::log_info(data);
+        // common::logger::log_info(data);
         std::vector<std::string> str_vec;
         common::utility::split(data, ',', str_vec);
         hist.date      = str_vec[0];

@@ -1,7 +1,7 @@
 /**
 *Author: Steve Zhong
 *Creation Date: 2015年06月22日 星期一 00时13分41秒
-*Last Modified: 2015年07月30日 星期四 21时39分53秒
+*Last Modified: 2015年08月01日 星期六 11时33分57秒
 *Purpose:
 **/
 
@@ -50,8 +50,11 @@ public:
     }
 
     static void code_error(const string& code) { cerr << "股票代码(简拼)[" << code << "]不存在，请检查！" << endl; }
-    static void cmd_error(const string& code) { cerr << "未知命令[" << code << "]，请检查！" << endl; }
-    static void dir_not_exist(const string& code) { cerr << "目录[" << code << "]不存在，请检查！" << endl; }
+    static void cmd_error(const string& cmd) { cerr << "未知命令[" << cmd << "]，请检查！" << endl; }
+    static void option_error(const string& option) { cerr << "未知选项[" << option << "]: 格式错误" << endl; }
+    static void option_arg_error(const string& option, const string& arg) { cerr << "未知选项[" << option << "]的参数" << arg << "，请检查！" << endl; }
+    static void dir_not_exist(const string& path) { cerr << "目录[" << path << "]不存在，请检查！" << endl; }
+    static void parse_xml_error(const char *error_info) { cerr << "解析配置xml文件错误: " << error_info << endl; }
 };
 
 }

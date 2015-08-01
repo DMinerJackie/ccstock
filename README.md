@@ -47,13 +47,16 @@
     --add-option arg      追加自选股,股票代码用','分开
     --del-option arg      删除自选股,股票代码用','分开
     -O [ --show-option ]  查看自选股
-    -H                    获取历史数据
 
 查看创业板(cyb)现价前20的股票
 
     ./ccstock -c ccstock.xml -d cyb -t 20 -o xj
 
 ###版本更新
+
+####2015-08-01. Verion 0.3
+1. 增加`DataCenter`模块，获取数据(历史数据)
+2. 修正部分bug
 
 ####2015-07-13. Verion 0.2
 1. 增加通过简拼查询功能
