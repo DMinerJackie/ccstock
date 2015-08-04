@@ -1,0 +1,15 @@
+<mail>
+    <!-- 发送者邮箱信息配置 -->
+    <sender>
+        <username></username>
+        <smtpserver>smtp.qq.com</smtpserver>
+        <port></port>
+        <password></password>
+    </sender>
+    <!-- 接收者邮箱集合 -->
+    <recv>
+        <address>526707725@qq.com</address>
+        <address>sizhi.zhong@foxmail.com</address>
+    </recv>
+    <body>mail_body.txt</body>
+</mail>

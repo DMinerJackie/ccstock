@@ -3,6 +3,6 @@ build/*
 !build/bin/*
 build/bin/test
 build/bin/data/history/*
-#src/test/*
+src/test/*
 .*.swp
 .*.swo

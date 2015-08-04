@@ -1,0 +1,7 @@
+From: "Sender" <526707725@qq.com>
+To: "Receiver" <zhongsizhi@foxmail.com>
+Subject: This is a test
+
+Hi Sizhi,
+I'm sending this mail with curl thru my qqmail account.
+Bye!
